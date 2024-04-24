@@ -61,7 +61,7 @@ InputDecoration filled_search_field_decoration(String hint){
       borderRadius: BorderRadius.circular(15)
     ),
     filled: true,
-    fillColor: const Color.fromARGB(255, 116, 165, 249),
+    fillColor: Color.fromARGB(255, 211, 213, 218),
     hoverColor: Colors.transparent,
     hintStyle: TextStyle(fontSize: 18, color: Colors.white.withOpacity(0.9)),
     hintText: hint,

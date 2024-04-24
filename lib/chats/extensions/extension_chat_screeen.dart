@@ -10,8 +10,20 @@ extension on ChatScreenState{
       if(event.toString().length > 0){
         var data = event.toString();
 
+        if(data == '__messages_cleared__'){
+          messages.clear();
+
+          setState(() {
+            messages;
+          });
+
+          state = chatState.noMessages;
+
+          return;
+        }
+
         int userId = int.parse(data.substring(0, data.indexOf(':')));
-        String message =  data.substring(data.indexOf(':') + 2);
+        String message = data.substring(data.indexOf(':') + 2);
 
         messages.add(MessageModel(userId: userId, message: message, sentAt: DateTime.now()));
 

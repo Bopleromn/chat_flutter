@@ -29,9 +29,7 @@ extension on ChatsScreenState{
 void goToChat(UserModel otherUser, context) async {
   var json = {
     'data': [
-      GetIt
-          .I<UserModel>()
-          .id,
+      GetIt.I<UserModel>().id,
       otherUser.id
     ]
   };

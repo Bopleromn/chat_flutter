@@ -30,7 +30,7 @@ class ChatsScreenState extends State<ChatsScreen> {
 
   static List<UserModel> users = [];
 
-  void initUsers() async{
+  void initUsers() async {
     users = await initAllUsers();
 
     setState(() {

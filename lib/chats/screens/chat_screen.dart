@@ -65,7 +65,7 @@ class ChatScreenState extends State<ChatScreen> {
             children: [
               Expanded(
                 child: state == chatState.loading ? Container() :
-                      (state == chatState.noMessages ? Center(child: Text('Здесь пока нет сообщений', style: medium_black(),)) :
+                      (state == chatState.noMessages ? Center(child: Text('Здесь пока нет сообщений', style: medium_grey(),)) :
                         ListView.builder(
                           itemCount: messages.length,
                           controller: _scrollController,

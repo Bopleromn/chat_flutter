@@ -56,7 +56,9 @@ Widget message_bubble_widget(MessageModel message, context){
         children: [
           Flexible(child: Text(message.message, style: small_white(),)),
           SizedBox(width: 1.5.w,),
-          Text(message.sentAt.hour.toString() + ':' + (message.sentAt.toString().length == 1 ?  '0${message.sentAt.minute}' : message.sentAt.minute.toString()), style: small_white(), textAlign: TextAlign.right,),
+          Text(message.sentAt.hour.toString() + ':' + (message.sentAt.toString().length == 1 ?  '0${message.sentAt.minute}' : message.sentAt.minute.toString()),
+            style: TextStyle(fontSize: 10, color: light_grey()),
+            textAlign: TextAlign.right,),
         ],
       ),
       ),

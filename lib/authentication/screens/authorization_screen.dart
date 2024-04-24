@@ -42,7 +42,7 @@ class _AuthorizationScreenState extends State<AuthorizationScreen> {
       user.password = sharedPreferences.getString('password')!;
 
       if(await user.authorize()){
-        Navigator.of(context).pushNamed('/NavigationBar');
+        Navigator.of(context).pushNamed('/ChatsScreen');
         showSnackBar(context, 'Вы успешно вошли');
       }
       else{

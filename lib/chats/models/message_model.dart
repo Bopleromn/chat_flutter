@@ -17,8 +17,6 @@ class MessageModel{
         'http://${globals.ip}/chats/$roomId'
     );
 
-    //
-
     List<dynamic> data = (response.data as Map<String, dynamic>)['data'];
 
     data.forEach((msg) async {

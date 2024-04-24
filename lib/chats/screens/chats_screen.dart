@@ -46,7 +46,6 @@ class ChatsScreenState extends State<ChatsScreen> {
         iconTheme: IconThemeData(
             color: currentTheme.primaryColor
         ),
-        automaticallyImplyLeading: false,
         title: Text('Чаты', style: large_black()),
         centerTitle: true,
       ),

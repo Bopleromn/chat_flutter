@@ -6,6 +6,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:sizer/sizer.dart';
 
 import '../../authentication/models/user_model.dart';
 import '../../core/globals.dart' as globals;
@@ -42,6 +43,7 @@ class ChatsScreenState extends State<ChatsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 5.h,
         automaticallyImplyLeading: false,
         iconTheme: IconThemeData(color: currentTheme.primaryColor),
         title: Text('Чаты', style: large_black()),

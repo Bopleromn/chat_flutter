@@ -75,8 +75,8 @@ class ChatScreenState extends State<ChatScreen> {
                             final message = messages[index];
 
                             return Row(
-                              mainAxisAlignment: (message.userId != GetIt.I<UserModel>().id)
-                                  ? MainAxisAlignment.end : MainAxisAlignment.start,
+                              mainAxisAlignment: (message.userId == GetIt.I<UserModel>().id)
+                                  ? MainAxisAlignment.start : (message.userId == 0 ? MainAxisAlignment.center : MainAxisAlignment.end),
                               children: [
                                 message_bubble_widget(message, context)
                               ],

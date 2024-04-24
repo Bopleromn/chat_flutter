@@ -1,5 +1,7 @@
+import 'package:authentication/chats/screens/chats_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
 
 class NavigationBar extends StatefulWidget {
   const NavigationBar({super.key});
@@ -11,6 +13,10 @@ class NavigationBar extends StatefulWidget {
 class _NavigationBarState extends State<NavigationBar> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return GNav(tabs: [
+      GButton(icon: Icons.chat),
+      GButton(icon: Icons.man)
+
+    ]);
   }
 }

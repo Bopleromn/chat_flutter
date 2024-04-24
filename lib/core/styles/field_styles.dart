@@ -54,3 +54,20 @@ InputDecoration search_field_decoration(String hint){
     )
   );
 }
+InputDecoration filled_search_field_decoration(String hint){
+  return InputDecoration(
+    border: OutlineInputBorder(
+      borderSide:BorderSide.none ,
+      borderRadius: BorderRadius.circular(15)
+    ),
+    filled: true,
+    fillColor: const Color.fromARGB(255, 116, 165, 249),
+    hoverColor: Colors.transparent,
+    hintStyle: TextStyle(fontSize: 18, color: Colors.white.withOpacity(0.9)),
+    hintText: hint,
+    suffixIcon: Icon(
+      Icons.search,
+      color: Colors.white.withOpacity(0.9),
+    )
+  );
+}

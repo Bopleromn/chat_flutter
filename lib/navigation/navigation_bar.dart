@@ -28,7 +28,7 @@ class _NavigationBarState extends State<NavigationBar> {
       bottomNavigationBar: Container(
         color: const Color.fromARGB(255, 116, 165, 249),
           child: Padding(
-            padding: const EdgeInsets.all(15.0),
+            padding: const EdgeInsets.all(10.0),
             child: GNav(
           
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,

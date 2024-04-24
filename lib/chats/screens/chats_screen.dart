@@ -43,10 +43,11 @@ class ChatsScreenState extends State<ChatsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 5.h,
+        shadowColor: Colors.transparent,
+        backgroundColor: const Color.fromARGB(255, 116, 165, 249),
+        toolbarHeight: 6.h,
         automaticallyImplyLeading: false,
-        iconTheme: IconThemeData(color: currentTheme.primaryColor),
-        title: Text('Чаты', style: large_black()),
+        title: Text('Чаты', style: large_white()),
         centerTitle: true,
       ),
       body: Container(
@@ -56,9 +57,9 @@ class ChatsScreenState extends State<ChatsScreen> {
             Expanded(child: Container(),flex: 3,),
             Expanded(child: Container(
               child: TextFormField(
-                decoration: search_field_decoration('Найти'),
+                decoration: filled_search_field_decoration('Найти'),
               ),
-            ),flex: 7,),
+            ),flex: 9,),
             Expanded(child: Container(),flex: 5,),
             Expanded(child:GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

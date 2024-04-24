@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get_it/get_it.dart';
+import 'package:sizer/sizer.dart';
 
 import '../../authentication/models/user_model.dart';
 import '../../core/styles/text_styles.dart';
@@ -30,9 +32,21 @@ Widget message_bubble_widget(MessageModel message, context){
             8.0,
           ),
         ),
-        child: Text(
-            message.message  ?? '',
-            style: small_white()
+        child: Column(
+          children: [
+            Expanded(
+              child: Text(
+                  message.message  ?? '',
+                  style: small_white(),
+                  
+              ),
+            ),
+            Container(
+              alignment: Alignment.bottomRight,
+              child: Text(textAlign: TextAlign.start,message.sentAt.hour.toString() + ':' + message.sentAt.minute.toString() ?? '',
+              style: small_white(),),
+            )
+          ],
         ),
       ),
     ),

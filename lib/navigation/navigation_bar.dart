@@ -11,15 +11,28 @@ class NavigationBar extends StatefulWidget {
 }
 
 class _NavigationBarState extends State<NavigationBar> {
+    int _selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
-    return GNav(
-      gap: 8,
-      tabs: [
-      GButton(icon: Icons.chat),
-      GButton(icon: Icons.man),
-      GButton(icon: Icons.settings)
-
-    ]);
+    return Scaffold(
+      bottomNavigationBar: Container(
+        color: const Color.fromARGB(255, 134, 94, 203),
+          child: GNav(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            activeColor: Colors.white,
+            color: Colors.white,
+            tabBackgroundColor: Color.fromARGB(255, 203, 142, 214),
+            gap: 8,
+            onTabChange: (index){
+              if(index == 0){
+                              }
+            },
+            tabs: [
+            GButton(icon: Icons.chat,text: 'Chats',),
+            GButton(icon: Icons.man, text: 'Profile',),
+          
+          ],
+        
+    )));
   }
 }

@@ -41,7 +41,7 @@ Widget message_bubble_widget(MessageModel message, context){
                 SizedBox(height: 5,),
                 Text(
                   message.sentAt.hour.toString() + ':' + (message.sentAt.minute.toString().length == 1 ? '0' + message.sentAt.minute.toString() : message.sentAt.minute.toString()),
-                  style: small_grey().copyWith(fontSize: 10, color: light_grey()),
+                  style: TextStyle(color: light_grey(), fontSize: 10),
                   textAlign: TextAlign.end,
                 ),
               ],

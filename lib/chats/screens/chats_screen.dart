@@ -43,10 +43,7 @@ class ChatsScreenState extends State<ChatsScreen> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        iconTheme: IconThemeData(
-            color: currentTheme.primaryColor
-        ),
-        automaticallyImplyLeading: false,
+        iconTheme: IconThemeData(color: currentTheme.primaryColor),
         title: Text('Чаты', style: large_black()),
         centerTitle: true,
       ),

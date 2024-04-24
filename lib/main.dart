@@ -1,10 +1,12 @@
 import 'package:authentication/authentication/models/user_model.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
 import 'authentication/screens/authorization_screen.dart';
 import 'core/routes.dart';
 import 'core/themes.dart';
+import 'core/globals.dart' as globals;
 
 void main() {
  _initSingletons();

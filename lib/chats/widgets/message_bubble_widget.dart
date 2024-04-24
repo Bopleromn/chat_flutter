@@ -1,3 +1,4 @@
+import 'package:authentication/core/styles/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -21,19 +22,32 @@ Widget message_bubble_widget(MessageModel message, context){
     child: Align(
       alignment: alignment,
       child: Container(
-        constraints: BoxConstraints(maxWidth: size.width * 0.66),
+        //constraints: BoxConstraints(maxWidth: size.width * 0.66),
         padding: EdgeInsets.all(8.0),
         margin: EdgeInsets.all(4.0),
         decoration: BoxDecoration(
           color: color,
-          borderRadius: BorderRadius.circular(
-            8.0,
-          ),
+          borderRadius: BorderRadius.circular(8),
         ),
-        child: Text(
-            message.message  ?? '',
-            style: small_white()
-        ),
+        child: Row(
+          children: [
+            Text(
+                message.message,
+                style: small_white()
+            ),
+            SizedBox(width: 10,),
+            Column(
+              children: [
+                SizedBox(height: 5,),
+                Text(
+                  message.sentAt.hour.toString() + ':' + (message.sentAt.minute.toString().length == 1 ? '0' + message.sentAt.minute.toString() : message.sentAt.minute.toString()),
+                  style: small_grey().copyWith(fontSize: 10, color: light_grey()),
+                  textAlign: TextAlign.end,
+                ),
+              ],
+            )
+          ],
+        )
       ),
     ),
   );

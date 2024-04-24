@@ -22,10 +22,9 @@ extension on ChatScreenState{
           return;
         }
 
-        int userId = int.parse(data.substring(0, data.indexOf(':')));
-        String message = data.substring(data.indexOf(':') + 2);
+        Map<String, dynamic> message = json.decode(data);
 
-        messages.add(MessageModel(userId: userId, message: message, sentAt: DateTime.now()));
+        messages.add(MessageModel(userId: message['user_id'], message: message['message'], sentAt: DateTime.parse(message['created_at'])));
 
         setState(() {
           messages;

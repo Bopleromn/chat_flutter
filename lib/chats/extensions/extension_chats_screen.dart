@@ -6,8 +6,7 @@ extension on ChatsScreenState{
         'http://${globals.ip}/users/all'
     );
 
-    final data = (response.data as Map<String, dynamic>)['data'] as List<
-        dynamic>;
+    final data = (response.data as Map<String, dynamic>)['data'] as List<dynamic>;
 
     List<UserModel> users = [];
 

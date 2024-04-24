@@ -31,7 +31,7 @@ Widget message_bubble_widget(MessageModel message, context){
           ),
         ),
         child: Text(
-            message.message ?? '',
+            message.message  ?? '',
             style: small_white()
         ),
       ),

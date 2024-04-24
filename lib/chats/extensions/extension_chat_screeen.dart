@@ -58,6 +58,10 @@ extension on ChatScreenState{
   }
 
   void _sendMessage() {
+    if(state != chatState.loaded){
+      state = chatState.loaded;
+    }
+
     if (_controller.text.isNotEmpty) {
       setState(() {
         _channel.sink.add(_controller.text);

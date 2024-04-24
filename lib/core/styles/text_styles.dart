@@ -106,7 +106,7 @@ TextStyle large_white(){
   return TextStyle(
     color: Colors.white,
     fontSize: largeFontSize,
-    fontWeight: FontWeight.normal,
+    fontWeight: FontWeight.bold,
   );
 }
 

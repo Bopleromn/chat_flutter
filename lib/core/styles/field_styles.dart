@@ -71,3 +71,14 @@ InputDecoration filled_search_field_decoration(String hint){
     )
   );
 }
+InputDecoration field_profile_decoration(String hint, Icon icon){
+  return InputDecoration(
+      border: OutlineInputBorder(),
+      hintText: hint,
+      focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: currentTheme.primaryColor),
+          borderRadius: BorderRadius.circular(10)
+      ),
+      suffixIcon: icon,
+  );
+}

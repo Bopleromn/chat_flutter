@@ -45,6 +45,7 @@ class UserModel{
     json['name'] = this.name;
     json['age'] = 0;
 
+
     try {
       await Dio().post(
           'http://${globals.ip}/users', data: json

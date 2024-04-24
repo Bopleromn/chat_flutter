@@ -13,9 +13,12 @@ class NavigationBar extends StatefulWidget {
 class _NavigationBarState extends State<NavigationBar> {
   @override
   Widget build(BuildContext context) {
-    return GNav(tabs: [
+    return GNav(
+      gap: 8,
+      tabs: [
       GButton(icon: Icons.chat),
-      GButton(icon: Icons.man)
+      GButton(icon: Icons.man),
+      GButton(icon: Icons.settings)
 
     ]);
   }

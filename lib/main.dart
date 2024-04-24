@@ -2,6 +2,7 @@ import 'package:authentication/authentication/models/user_model.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:sizer/sizer.dart';
 
 import 'authentication/screens/authorization_screen.dart';
@@ -37,8 +38,8 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: currentTheme,
-        home: AuthorizationScreen(),
         routes: myRoutes,
+        home: AuthorizationScreen(),
       );
     }
     );

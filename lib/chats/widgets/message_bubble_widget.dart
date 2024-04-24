@@ -11,13 +11,20 @@ import '../../core/themes.dart';
 import '../models/message_model.dart';
 
 Widget message_bubble_widget(MessageModel message, context){
-  final size = MediaQuery.sizeOf(context);
+  var alignment, color, size = MediaQuery.sizeOf(context);
 
-  final alignment = (message.userId == GetIt.I<UserModel>().id)
-      ? Alignment.centerLeft : Alignment.centerRight;
-
-  final color = (message.userId == GetIt.I<UserModel>().id)
-      ? Colors.grey : currentTheme.primaryColor;
+  if(message.userId == GetIt.I.get<UserModel>().id){
+    alignment = Alignment.centerLeft;
+    color = Colors.grey;
+  }
+  else if(message.userId == 0){
+    alignment = Alignment.center;
+    color = light_grey();
+  }
+  else{
+    alignment = Alignment.centerRight;
+    color = currentTheme.primaryColor;
+  }
 
   return GestureDetector(
     onTap: (){},

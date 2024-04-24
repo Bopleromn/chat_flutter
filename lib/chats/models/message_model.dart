@@ -17,17 +17,38 @@ class MessageModel{
         'http://${globals.ip}/chats/$roomId'
     );
 
+    //
+
     List<dynamic> data = (response.data as Map<String, dynamic>)['data'];
 
-    data.forEach((msg) {
+    data.forEach((msg) async {
       if(msg['message'].toString().length > 0) {
-        messages.add (
-            MessageModel(userId: msg['user_id'], message: msg['message'], sentAt: DateTime.now())
-        );
+        MessageModel message = MessageModel(userId: msg['user_id'], message: msg['message'], sentAt: DateTime.parse(msg['created_at']));
+
+        await addDate(messages, message);
+        messages.add(message);
       }
     });
 
     return messages;
+  }
+
+  static Future<void> addDate(List<MessageModel> messages, MessageModel message) async{
+    bool canAdd = true;
+    messages.forEach((element) {
+      if(element.sentAt.day == message.sentAt.day){
+        canAdd = false;
+        return;
+      }
+    });
+
+    if(!canAdd){
+      return;
+    }
+
+    var date = message.sentAt.day.toString() + ' ' + message.sentAt.month.toString();
+
+    messages.add(MessageModel(userId: 0, message: date, sentAt: message.sentAt));
   }
 
   static Future<bool> clearAllMessages(int roomId) async{

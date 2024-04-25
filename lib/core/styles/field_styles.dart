@@ -54,3 +54,31 @@ InputDecoration search_field_decoration(String hint){
     )
   );
 }
+InputDecoration filled_search_field_decoration(String hint){
+  return InputDecoration(
+    border: OutlineInputBorder(
+      borderSide:BorderSide.none ,
+      borderRadius: BorderRadius.circular(15)
+    ),
+    filled: true,
+    fillColor: const Color.fromARGB(255, 116, 165, 249),
+    hoverColor: Colors.transparent,
+    hintStyle: TextStyle(fontSize: 18, color: Colors.white.withOpacity(0.8)),
+    hintText: hint,
+    suffixIcon: Icon(
+      Icons.search,
+      color: Colors.white.withOpacity(0.9),
+    )
+  );
+}
+InputDecoration field_profile_decoration(String hint, Icon icon){
+  return InputDecoration(
+      border: OutlineInputBorder(),
+      hintText: hint,
+      focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: currentTheme.primaryColor),
+          borderRadius: BorderRadius.circular(10)
+      ),
+      suffixIcon: icon,
+  );
+}

@@ -1,6 +1,9 @@
+import 'package:authentication/authentication/models/user_model.dart';
 import 'package:authentication/chats/screens/chats_screen.dart';
+import 'package:authentication/profile/profile_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
 class NavigationBar extends StatefulWidget {
@@ -11,28 +14,50 @@ class NavigationBar extends StatefulWidget {
 }
 
 class _NavigationBarState extends State<NavigationBar> {
+    final model = GetIt.I<UserModel>();
     int _selectedIndex = 0;
+    PageController _pageController = PageController();
+        @override
+    void initState() {
+      if(model.email != 'email' && model.email != null){
+              super.initState();
+      }
+    }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      body: PageView(
+        physics: NeverScrollableScrollPhysics(),
+        controller: _pageController,
+        children: [
+          ChatsScreen(),
+          ProfileScreen(email: model.email, password: model.password, username: model.name,)
+        ],
+      ),
       bottomNavigationBar: Container(
-        color: const Color.fromARGB(255, 134, 94, 203),
-          child: GNav(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            activeColor: Colors.white,
-            color: Colors.white,
-            tabBackgroundColor: Color.fromARGB(255, 203, 142, 214),
-            gap: 8,
-            onTabChange: (index){
-              if(index == 0){
-                              }
-            },
-            tabs: [
-            GButton(icon: Icons.chat,text: 'Chats',),
-            GButton(icon: Icons.man, text: 'Profile',),
-          
-          ],
-        
-    )));
+        color: const Color.fromARGB(255, 116, 165, 249),
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: GNav(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              activeColor: Colors.white,
+              color: Colors.white,
+              tabBackgroundColor: Colors.white.withOpacity(0.4),
+              gap: 8,
+              onTabChange: (index){
+                  _pageController.animateToPage(index, duration: Duration(milliseconds: 200), curve: Curves.linear);
+              },
+              padding: EdgeInsets.all(14),
+              tabs: [
+              GButton(icon: Icons.chat,text: 'Chats',),
+              GButton(icon: Icons.man, text: 'Profile',),
+            
+            ],
+                    
+                ),
+          )));
+  }
+  void ChangeView(index){
+
   }
 }

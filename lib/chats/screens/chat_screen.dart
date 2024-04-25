@@ -49,7 +49,7 @@ class ChatScreenState extends State<ChatScreen> {
         centerTitle: true,
         title: Text(
           otherUser.name!,
-          style: small_black(),
+          style: medium_black(),
         ),
         actions: [
           drop_down_button(context, this),

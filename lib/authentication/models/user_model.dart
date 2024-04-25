@@ -7,7 +7,7 @@ import 'package:dio/dio.dart';
 import '../../core/globals.dart' as globals;
 
 class UserModel{
-  late String email;
+  String email = 'dsa';
   late String password;
   late String name;
   late int id;
@@ -44,6 +44,7 @@ class UserModel{
     json['password'] = this.password;
     json['name'] = this.name;
     json['age'] = 0;
+
 
     try {
       await Dio().post(

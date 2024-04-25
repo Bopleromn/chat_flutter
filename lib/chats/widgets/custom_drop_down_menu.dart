@@ -38,6 +38,9 @@ void onItemChanged(MenuItem item, ChatScreenState chatScreen){
   if(item.text == 'Очистить чат'){
     chatScreen.clearAllMessages();
   }
+  else if(item.text == 'Отредактировать'){
+
+  }
 }
 
 class MenuItem {

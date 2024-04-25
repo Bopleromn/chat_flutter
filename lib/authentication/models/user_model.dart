@@ -7,11 +7,13 @@ import 'package:dio/dio.dart';
 import '../../core/globals.dart' as globals;
 
 class UserModel{
-  String email = 'dsa';
+  late String email;
   late String password;
   late String name;
   late int id;
   late String verificationCode;
+  late String photo;
+
 
   UserModel(){}
 
@@ -29,6 +31,7 @@ class UserModel{
       this.email = json['data']['email'];
       this.password = json['data']['password'];
       this.name = json['data']['name'];
+      this.photo = json['data']['photo'];
 
       return true;
     }
@@ -44,7 +47,6 @@ class UserModel{
     json['password'] = this.password;
     json['name'] = this.name;
     json['age'] = 0;
-
 
     try {
       await Dio().post(

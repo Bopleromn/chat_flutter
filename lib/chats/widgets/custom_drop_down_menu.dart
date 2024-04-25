@@ -23,7 +23,7 @@ Widget CustomDropdownMenu({required context, required ChatScreenState chatScreen
         },
         //buttonStyleData: ButtonStyleData(decoration: BoxDecoration(color: Colors.transparent)),
         dropdownStyleData: DropdownStyleData(
-          width: 150,
+          width: 170,
           maxHeight: 40,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(4),
@@ -54,7 +54,7 @@ class MenuItem {
       children: [
         Icon(icon, color: Colors.black, size: 12.sp),
         Expanded(
-          child: Text(text, style: small_black().copyWith(fontSize: 8.sp)
+          child: Text(text, style: small_black().copyWith(fontSize: 10.sp)
         ),
         ),
       ],

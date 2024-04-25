@@ -34,7 +34,7 @@ Widget message_bubble_widget(MessageModel message, context, ChatScreenState chat
   return CustomDropdownMenu(
       context: context, 
       chatScreen: chatScreen,
-      menuItems: [MenuItem(text: 'Отредактировать', icon: CupertinoIcons.pen)],
+      menuItems: [MenuItem(text: ' Отредактировать', icon: CupertinoIcons.pen)],
       child: Container(
           constraints: BoxConstraints(maxWidth: MediaQuery
               .sizeOf(context)

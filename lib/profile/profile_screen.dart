@@ -9,8 +9,7 @@ part 'extensions/extension_profile_screen.dart';
 class ProfileScreen extends StatefulWidget {
 
   @override
-  State<ProfileScreen> createState() => _ProfileScreenState(email: email, 
-  password:  password, name: username);
+  State<ProfileScreen> createState() => _ProfileScreenState(email: email, password:  password, name: username);
   late String username;
   late String password;
   late String email;
@@ -25,7 +24,6 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   _ProfileScreenState({required this.email,required this.password,required this.name});
-  UserModel model = UserModel();
   TextEditingController emailcontroller = TextEditingController();
   TextEditingController passwordlcontroller = TextEditingController();
   TextEditingController namecontroller = TextEditingController();
@@ -82,7 +80,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     color: const Color.fromARGB(255, 116, 165, 249),
                     borderRadius: BorderRadius.circular(15),
                   ),
-                  child: TextButton.icon(onPressed: (){}, icon: Icon(Icons.share,color: Colors.white, ), label: Text('Сохранить',style: medium_white(),)),)
+                  child: TextButton.icon(onPressed: (){}, icon: Icon(Icons.save,color: Colors.white, ), label: Text('Сохранить',style: medium_white(),)),)
                 
               ],
             ))

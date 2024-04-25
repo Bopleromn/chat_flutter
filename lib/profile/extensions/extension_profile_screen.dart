@@ -1,7 +1,7 @@
 part of '../profile_screen.dart';
 
 extension on _ProfileScreenState{
-  void GetAllInfo (){
+  void GetAllInfo () async{
     setState(() {
     emailcontroller.text = email;
     passwordlcontroller.text  = password;
@@ -19,5 +19,8 @@ extension on _ProfileScreenState{
     setState(() {
       passwordVisible;
     });
+  }
+  void SaveAllInfo(){
+
   }
 }

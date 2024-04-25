@@ -3,6 +3,7 @@ import 'package:authentication/chats/screens/chats_screen.dart';
 import 'package:authentication/profile/profile_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
 class NavigationBar extends StatefulWidget {
@@ -13,7 +14,7 @@ class NavigationBar extends StatefulWidget {
 }
 
 class _NavigationBarState extends State<NavigationBar> {
-  UserModel model = UserModel();
+    final model = GetIt.I<UserModel>();
     int _selectedIndex = 0;
     PageController _pageController = PageController();
         @override
@@ -38,7 +39,6 @@ class _NavigationBarState extends State<NavigationBar> {
           child: Padding(
             padding: const EdgeInsets.all(10.0),
             child: GNav(
-          
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               activeColor: Colors.white,
               color: Colors.white,

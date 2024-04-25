@@ -31,7 +31,6 @@ Widget users_list_widget(BuildContext context, int index){
             Expanded(child: Container(),flex: 5,),
             Expanded(child: CircleAvatar(
               radius: 35,
-              backgroundImage: AssetImage('assets/manimage.png'),
             ),flex: 20,),
             Expanded(child: Container(),flex: 3,),
             Expanded(child: Container(

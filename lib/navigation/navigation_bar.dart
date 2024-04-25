@@ -1,3 +1,4 @@
+import 'package:authentication/authentication/models/user_model.dart';
 import 'package:authentication/chats/screens/chats_screen.dart';
 import 'package:authentication/profile/profile_screen.dart';
 import 'package:flutter/cupertino.dart';
@@ -12,8 +13,15 @@ class NavigationBar extends StatefulWidget {
 }
 
 class _NavigationBarState extends State<NavigationBar> {
+  UserModel model = UserModel();
     int _selectedIndex = 0;
     PageController _pageController = PageController();
+        @override
+    void initState() {
+      if(model.email != 'email' && model.email != null){
+              super.initState();
+      }
+    }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +30,7 @@ class _NavigationBarState extends State<NavigationBar> {
         controller: _pageController,
         children: [
           ChatsScreen(),
-          ProfileScreen()
+          ProfileScreen(email: model.email, password: model.password, username: model.name,)
         ],
       ),
       bottomNavigationBar: Container(

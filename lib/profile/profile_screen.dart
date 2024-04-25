@@ -8,18 +8,33 @@ import 'package:sizer/sizer.dart';
 part 'extensions/extension_profile_screen.dart';
 class ProfileScreen extends StatefulWidget {
 
-  const ProfileScreen({super.key});
-
   @override
-  State<ProfileScreen> createState() => _ProfileScreenState();
+  State<ProfileScreen> createState() => _ProfileScreenState(email: email, 
+  password:  password, name: username);
+  late String username;
+  late String password;
+  late String email;
+  ProfileScreen(
+    {
+      required this.email,
+      required this.password,
+      required this.username
+    }
+  );
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  _ProfileScreenState({required this.email,required this.password,required this.name});
   UserModel model = UserModel();
   TextEditingController emailcontroller = TextEditingController();
   TextEditingController passwordlcontroller = TextEditingController();
   TextEditingController namecontroller = TextEditingController();
   TextEditingController phonecontroller = TextEditingController();
+      @override
+    void initState() {
+      GetAllInfo();
+      super.initState();
+    }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,18 +93,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   bool passwordVisible = false, isChecked = false;
-
-  void updatePasswordVisibility(){
-    if(passwordVisible == true){
-      passwordVisible = false;
-    }
-    else{
-      passwordVisible = true;
-    }
-
-    setState(() {
-      passwordVisible;
-    });
-  }
-
+  late String name;
+  late String email;
+  late String password;
 }

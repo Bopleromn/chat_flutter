@@ -7,9 +7,9 @@ import 'package:dio/dio.dart';
 import '../../core/globals.dart' as globals;
 
 class UserModel{
-  late String email;
-  late String password;
-  late String name;
+  String email = 'email';
+  String password = 'password';
+  String name = 'name';
   late int id;
   late String verificationCode;
 

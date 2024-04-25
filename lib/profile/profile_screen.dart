@@ -35,6 +35,9 @@ class ProfileScreenState extends State<ProfileScreen> {
     setState(() {
       image = img;
     });
+    setState(() {
+      
+    });
   }
   ProfileScreenState({required this.email,required this.password,required this.name});
   TextEditingController emailcontroller = TextEditingController();
@@ -71,8 +74,8 @@ class ProfileScreenState extends State<ProfileScreen> {
                      NetworkImage('https://irecommend.ru/sites/default/files/product-images/1355960/FCtcXQX22GyEDWtOMIw.jpg'),
                     radius: 70,
                     
-                  ) : CircleAvatar(backgroundImage: MemoryImage(image!),),
-                  Positioned(child: IconButton(icon: Icon(Icons.add_a_photo), onPressed: (){}), bottom: 10,left: 100,)
+                  ) : CircleAvatar(backgroundImage: MemoryImage(image!),radius: 70,),
+                  Positioned(child: IconButton(icon: Icon(Icons.add_a_photo), onPressed: (){selectImage();}), bottom: 10,left: 100,)
                   ]
                 ),
                 

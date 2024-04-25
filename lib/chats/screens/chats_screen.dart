@@ -2,6 +2,7 @@ import 'package:authentication/chats/widgets/user_list_widget.dart';
 import 'package:authentication/core/styles/field_styles.dart';
 import 'package:authentication/core/styles/text_styles.dart';
 import 'package:authentication/core/themes.dart';
+import 'package:authentication/widgets/avatar.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -49,7 +50,7 @@ class ChatsScreenState extends State<ChatsScreen> {
         padding: EdgeInsets.only(left: 3.w,right: 3.w,top: 10.h),
         child: Column(
           children: [
-            CircleAvatar(backgroundColor: Colors.black,radius: 70,),
+            CircleCustomAvatar(context),
             SizedBox(height: 2.h,),
             Text('Alex', style: large_black(), textAlign: TextAlign.start,),
             SizedBox(child: Container(color: Colors.grey.withOpacity(0.7),),height: 2,),

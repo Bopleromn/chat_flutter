@@ -21,6 +21,6 @@ extension on ProfileScreenState{
     });
   }
   void SaveAllInfo(){
-
+    final usermodel = GetIt.I<UserModel>();
   }
 }

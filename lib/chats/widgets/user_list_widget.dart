@@ -1,5 +1,6 @@
 import 'package:authentication/core/styles/colors.dart';
 import 'package:authentication/core/styles/text_styles.dart';
+import 'package:authentication/widgets/avatar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -29,9 +30,7 @@ Widget users_list_widget(BuildContext context, int index){
         child: Row(
           children: [
             Expanded(child: Container(),flex: 5,),
-            Expanded(child: CircleAvatar(
-              radius: 35,
-            ),flex: 20,),
+            Expanded(child: CircleCustomAvatar(context),flex: 20,),
             Expanded(child: Container(),flex: 3,),
             Expanded(child: Container(
               child: Column(

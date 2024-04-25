@@ -23,9 +23,9 @@ extension on ChatScreenState{
         }
 
         Map<String, dynamic> message = json.decode(data);
-        MessageModel messageModel = MessageModel(userId: message['user_id'], message: message['message'], sentAt: DateTime.parse(message['created_at']));
+        MessageModel messageModel = MessageModel(id: message['id'], userId: message['user_id'], message: message['message'], sentAt: DateTime.parse(message['created_at']));
 
-        await MessageModel.addDate(messages, messageModel);
+        MessageModel.addDate(messages, messageModel);
 
         messages.add(messageModel);
 

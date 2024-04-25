@@ -4,11 +4,12 @@ import 'package:flutter/material.dart';
 import '../../core/globals.dart' as globals;
 
 class MessageModel{
+  int id;
   int userId;
   String message;
   DateTime sentAt;
 
-  MessageModel({required this.userId, required this.message, required this.sentAt});
+  MessageModel({required this.id, required this.userId, required this.message, required this.sentAt});
 
   static Future<List<MessageModel>> getAllMessages(int roomId) async{
     List<MessageModel> messages = [];
@@ -21,9 +22,9 @@ class MessageModel{
 
     data.forEach((msg) async {
       if(msg['message'].toString().length > 0) {
-        MessageModel message = MessageModel(userId: msg['user_id'], message: msg['message'], sentAt: DateTime.parse(msg['created_at']));
+        MessageModel message = MessageModel(id: msg['id'], userId: msg['user_id'], message: msg['message'], sentAt: DateTime.parse(msg['created_at']));
 
-        await addDate(messages, message);
+        addDate(messages, message);
         messages.add(message);
       }
     });
@@ -31,10 +32,11 @@ class MessageModel{
     return messages;
   }
 
-  static Future<void> addDate(List<MessageModel> messages, MessageModel message) async{
+  static void addDate(List<MessageModel> messages, MessageModel message){
     bool canAdd = true;
+
     messages.forEach((element) {
-      if(element.sentAt.day == message.sentAt.day){
+      if(element.sentAt.month == message.sentAt.month && element.sentAt.day == message.sentAt.day){
         canAdd = false;
         return;
       }
@@ -46,12 +48,12 @@ class MessageModel{
 
     var date = message.sentAt.day.toString() + ' ' + message.sentAt.month.toString();
 
-    messages.add(MessageModel(userId: 0, message: date, sentAt: message.sentAt));
+    messages.add(MessageModel(id: 0, userId: 0, message: date, sentAt: message.sentAt));
   }
 
   static Future<bool> clearAllMessages(int roomId) async{
     try {
-      var response = await Dio().delete(
+      await Dio().delete(
           'http://${globals.ip}/chats/$roomId'
       );
 

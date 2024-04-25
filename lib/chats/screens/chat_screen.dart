@@ -6,15 +6,19 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_portal/flutter_portal.dart';
 import 'package:get_it/get_it.dart';
+import 'package:sizer/sizer.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
 import '../../authentication/models/user_model.dart';
 import '../../core/globals.dart' as globals;
+import '../../core/styles/colors.dart';
+import '../../core/themes.dart';
 import '../models/message_model.dart';
-import '../widgets/message_bubble_widget.dart';
 
 part '../extensions/extension_chat_screeen.dart';
+part '../widgets/message_bubble_widget.dart';
 
 class ChatScreen extends StatefulWidget{
   @override

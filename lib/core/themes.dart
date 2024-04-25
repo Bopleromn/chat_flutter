@@ -23,10 +23,9 @@ final darkTheme = ThemeData(
   primaryColor: const Color.fromARGB(255, 25, 57, 112),
   secondaryHeaderColor: Colors.orange,
   cardColor: const Color.fromARGB(255, 25, 57, 112),
-  
 );
 
-late ThemeData currentTheme = ThemeData();
+ThemeData currentTheme = lightTheme;
 
 void changeTheme(){
   if(currentTheme != lightTheme){

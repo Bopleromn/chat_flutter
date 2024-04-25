@@ -52,9 +52,9 @@ class MenuItem {
   Widget buildItem() {
     return Row(
       children: [
-        Icon(icon, color: Colors.black, size: 20),
+        Icon(icon, color: Colors.black, size: 12.sp),
         Expanded(
-          child: Text(text, style: small_black().copyWith(fontSize: 12)
+          child: Text(text, style: small_black().copyWith(fontSize: 8.sp)
         ),
         ),
       ],

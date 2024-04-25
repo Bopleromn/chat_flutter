@@ -9,7 +9,7 @@ part 'extensions/extension_profile_screen.dart';
 class ProfileScreen extends StatefulWidget {
 
   @override
-  State<ProfileScreen> createState() => _ProfileScreenState(email: email, password:  password, name: username);
+  State<ProfileScreen> createState() => ProfileScreenState(email: email, password:  password, name: username);
   late String username;
   late String password;
   late String email;
@@ -22,8 +22,8 @@ class ProfileScreen extends StatefulWidget {
   );
 }
 
-class _ProfileScreenState extends State<ProfileScreen> {
-  _ProfileScreenState({required this.email,required this.password,required this.name});
+class ProfileScreenState extends State<ProfileScreen> {
+  ProfileScreenState({required this.email,required this.password,required this.name});
   TextEditingController emailcontroller = TextEditingController();
   TextEditingController passwordlcontroller = TextEditingController();
   TextEditingController namecontroller = TextEditingController();
@@ -37,9 +37,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         shadowColor: Colors.transparent,
         backgroundColor: const Color.fromARGB(255, 116, 165, 249),
-        automaticallyImplyLeading: false,
         title: Text(
           'Профиль', style: large_white(),
         ),

@@ -19,4 +19,20 @@ final lightTheme = ThemeData(
   colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueAccent, brightness: Brightness.light,).copyWith(background: Colors.white),
 );
 
+final darkTheme = ThemeData(
+  primaryColor: const Color.fromARGB(255, 25, 57, 112),
+  secondaryHeaderColor: Colors.orange,
+  cardColor: const Color.fromARGB(255, 25, 57, 112),
+  
+);
+
 late ThemeData currentTheme = ThemeData();
+
+void changeTheme(){
+  if(currentTheme != lightTheme){
+    currentTheme = lightTheme;
+  }
+  else{
+    currentTheme = darkTheme;
+  }
+}

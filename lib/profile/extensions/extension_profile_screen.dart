@@ -1,6 +1,6 @@
 part of '../profile_screen.dart';
 
-extension on _ProfileScreenState{
+extension on ProfileScreenState{
   void GetAllInfo () async{
     setState(() {
     emailcontroller.text = email;

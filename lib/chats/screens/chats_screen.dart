@@ -5,6 +5,7 @@ import 'package:authentication/core/themes.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get_it/get_it.dart';
 import 'package:sizer/sizer.dart';
 
@@ -42,11 +43,53 @@ class ChatsScreenState extends State<ChatsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Drawer(
+        backgroundColor: currentTheme.cardColor,
+        child: Padding(
+        padding: EdgeInsets.only(left: 3.w,right: 3.w,top: 10.h),
+        child: Column(
+          children: [
+            CircleAvatar(backgroundColor: Colors.black,radius: 70,),
+            SizedBox(height: 2.h,),
+            Text('Alex', style: large_black(), textAlign: TextAlign.start,),
+            SizedBox(child: Container(color: Colors.grey.withOpacity(0.7),),height: 2,),
+            SizedBox(height: 2.h,),
+            Container(
+              height: 6.h,
+              decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.2),
+                    offset: Offset(0, 2),
+                    blurRadius: 4
+                  ),
+                ],
+                color: currentTheme.cardColor
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Text('Темная тема', style: small_black(),),
+                  CupertinoSwitch(value: isChecked!, onChanged: (newbool){
+                     setState(() {
+                              isChecked = newbool!;
+                              changeTheme();
+                              currentTheme;
+                            });
+                  })
+                ],
+              ),
+            )
+            
+          ],
+        ),
+      ),
+      ),
       appBar: AppBar(
+        iconTheme: IconThemeData(color: Colors.white),
         shadowColor: Colors.transparent,
         backgroundColor: const Color.fromARGB(255, 116, 165, 249),
         toolbarHeight: 6.h,
-        automaticallyImplyLeading: false,
         title: Text('Чаты', style: large_white()),
         centerTitle: true,
       ),
@@ -76,4 +119,5 @@ class ChatsScreenState extends State<ChatsScreen> {
       ),
     );
   }
+  bool isChecked = false;
 }

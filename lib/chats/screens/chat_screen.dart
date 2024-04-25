@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:authentication/chats/widgets/drop_down_button.dart';
+import 'package:authentication/chats/widgets/custom_drop_down_menu.dart';
 import 'package:authentication/core/styles/text_styles.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
@@ -16,9 +16,9 @@ import '../../core/globals.dart' as globals;
 import '../../core/styles/colors.dart';
 import '../../core/themes.dart';
 import '../models/message_model.dart';
+import '../widgets/message_bubble_widget.dart';
 
 part '../extensions/extension_chat_screeen.dart';
-part '../widgets/message_bubble_widget.dart';
 
 class ChatScreen extends StatefulWidget{
   @override
@@ -56,7 +56,15 @@ class ChatScreenState extends State<ChatScreen> {
           style: medium_black(),
         ),
         actions: [
-          drop_down_button(context, this),
+          CustomDropdownMenu(
+            context: context,
+            chatScreen: this,
+            menuItems: [MenuItem(text: 'Очистить чат', icon: CupertinoIcons.trash)],
+            child: Icon(
+                Icons.list,
+                size: 35,
+              ),
+          ),
         ],
       ),
       body: SafeArea(
@@ -82,7 +90,7 @@ class ChatScreenState extends State<ChatScreen> {
                               mainAxisAlignment: (message.userId == GetIt.I<UserModel>().id)
                                   ? MainAxisAlignment.start : (message.userId == 0 ? MainAxisAlignment.center : MainAxisAlignment.end),
                               children: [
-                                message_bubble_widget(message, context)
+                                message_bubble_widget(message, context, this)
                               ],
                             );
                           },

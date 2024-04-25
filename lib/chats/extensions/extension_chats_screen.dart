@@ -11,12 +11,9 @@ extension on ChatsScreenState{
     List<UserModel> users = [];
 
     data.forEach((user) {
-      UserModel userToAdd = UserModel.filled(
-          id: user['id'], email: user['email'], name: user['name']);
+      UserModel userToAdd = UserModel.filled(id: user['id'], email: user['email'], name: user['name']);
 
-      if (userToAdd.id != GetIt
-          .I<UserModel>()
-          .id) {
+      if (userToAdd.id != GetIt.I<UserModel>().id) {
         users.add(userToAdd);
       }
     });

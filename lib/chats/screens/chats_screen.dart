@@ -45,7 +45,7 @@ class ChatsScreenState extends State<ChatsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: Drawer(
-        backgroundColor: currentTheme.cardColor,
+        backgroundColor: currentTheme.colorScheme.background,
         child: Padding(
         padding: EdgeInsets.only(left: 3.w,right: 3.w,top: 10.h),
         child: Column(
@@ -73,25 +73,22 @@ class ChatsScreenState extends State<ChatsScreen> {
                   Text('Темная тема', style: small_black(),),
                   CupertinoSwitch(value: isChecked!, onChanged: (newbool){
                      setState(() {
-                              isChecked = newbool!;
-                              changeTheme();
-                              currentTheme;
-                            });
+                      isChecked = newbool!;
+                      changeTheme();
+                      currentTheme;
+                     });
                   })
                 ],
               ),
             )
-            
           ],
         ),
       ),
       ),
       appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.white),
         shadowColor: Colors.transparent,
-        backgroundColor: const Color.fromARGB(255, 116, 165, 249),
-        toolbarHeight: 6.h,
-        title: Text('Чаты', style: large_white()),
+        backgroundColor: currentTheme.colorScheme.background,
+        title: Text('Чаты', style: medium_black()),
         centerTitle: true,
       ),
       body: Container(
@@ -114,7 +111,7 @@ class ChatsScreenState extends State<ChatsScreen> {
                 ),
                 itemCount: 6,
                 itemBuilder: users_list_widget
-            ),flex: 85,)
+            ),flex: 85)
           ],
         ),
       ),

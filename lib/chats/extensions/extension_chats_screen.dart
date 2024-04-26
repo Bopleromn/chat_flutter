@@ -31,7 +31,7 @@ void goToChat(UserModel otherUser, context) async {
   };
 
   final response = await Dio().post(
-    'http://${globals.ip}/chats/', data: json,
+    'http://${globals.ip}/chats/rooms', data: json,
   );
 
   final data = response.data as Map<String, dynamic>;

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
@@ -11,11 +13,37 @@ class MessageModel{
 
   MessageModel({required this.id, required this.userId, required this.message, required this.sentAt});
 
+  Future<bool> delete() async{
+    try{
+      await Dio().delete(
+        'http://${globals.ip}/chats/messages/${id}'
+      );
+
+      return true;
+    }
+    catch (e){
+      return false;
+    }
+  }
+
+  Future<bool> update() async{
+    try{
+      await Dio().put(
+        'http://${globals.ip}/chats/messages/${id}?message=${message}'
+      );
+
+      return true;
+    }
+    catch (e){
+      return false;
+    }
+  }
+
   static Future<List<MessageModel>> getAllMessages(int roomId) async{
     List<MessageModel> messages = [];
 
     var response = await Dio().get(
-        'http://${globals.ip}/chats/$roomId'
+        'http://${globals.ip}/chats/rooms/$roomId'
     );
 
     List<dynamic> data = (response.data as Map<String, dynamic>)['data'];
@@ -54,7 +82,7 @@ class MessageModel{
   static Future<bool> clearAllMessages(int roomId) async{
     try {
       await Dio().delete(
-          'http://${globals.ip}/chats/$roomId'
+          'http://${globals.ip}/chats/rooms/$roomId'
       );
 
       return true;

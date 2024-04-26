@@ -1,5 +1,7 @@
 import 'package:authentication/authentication/models/user_model.dart';
 import 'package:authentication/chats/screens/chats_screen.dart';
+import 'package:authentication/core/styles/colors.dart';
+import 'package:authentication/core/themes.dart';
 import 'package:authentication/profile/profile_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -14,15 +16,8 @@ class NavigationBar extends StatefulWidget {
 }
 
 class _NavigationBarState extends State<NavigationBar> {
-    final model = GetIt.I<UserModel>();
-    int _selectedIndex = 0;
-    PageController _pageController = PageController();
-        @override
-    void initState() {
-      if(model.email != 'email' && model.email != null){
-              super.initState();
-      }
-    }
+  PageController _pageController = PageController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,33 +26,34 @@ class _NavigationBarState extends State<NavigationBar> {
         controller: _pageController,
         children: [
           ChatsScreen(),
-          ProfileScreen(email: model.email, password: model.password, username: model.name,)
+          ProfileScreen(user: GetIt.I<UserModel>()),
         ],
       ),
       bottomNavigationBar: Container(
-        color: const Color.fromARGB(255, 116, 165, 249),
+        color: currentTheme.cardColor,
           child: Padding(
-            padding: const EdgeInsets.all(10.0),
+            padding: EdgeInsets.all(10.0),
             child: GNav(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              activeColor: Colors.white,
-              color: Colors.white,
-              tabBackgroundColor: Colors.white.withOpacity(0.4),
+              activeColor: currentTheme.hintColor,
+              color: currentTheme.hintColor,
+              tabBackgroundColor: currentTheme.hintColor.withOpacity(0.6),
               gap: 8,
               onTabChange: (index){
                   _pageController.animateToPage(index, duration: Duration(milliseconds: 200), curve: Curves.linear);
               },
               padding: EdgeInsets.all(14),
               tabs: [
-              GButton(icon: Icons.chat,text: 'Chats',),
-              GButton(icon: Icons.man, text: 'Profile',),
-            
-            ],
-                    
-                ),
-          )));
+                GButton(icon: Icons.chat,text: 'Chats',),
+                GButton(icon: Icons.man, text: 'Profile',),
+              ],
+            ),
+          ),
+      ),
+    );
   }
-  void ChangeView(index){
+
+  void changeView(index){
 
   }
 }

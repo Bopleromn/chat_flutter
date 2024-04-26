@@ -15,7 +15,6 @@ class UserModel{
   late String verificationCode;
   late Uint8List photo;
 
-
   UserModel(){}
 
   UserModel.filled({required this.id, required this.email, required this.name});

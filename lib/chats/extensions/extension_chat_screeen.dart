@@ -21,6 +21,33 @@ extension on ChatScreenState{
 
           return;
         }
+        else if(data.contains('__message_deleted__')){
+          int id = int.parse(data.substring(('__message_deleted__').length));
+
+          messages.removeWhere((element) => element.id == id);
+
+          setState(() {
+            messages;
+          });
+
+          _checkState();
+
+          return;
+        }
+        else if(data.contains('__message_updated__')){
+          String response = data.substring(('__message_updated__').length);
+          int id = int.parse(response.substring(0, response.indexOf('_')));
+          String message = response.substring(response.indexOf('_') + 1);
+
+          messages.where((element) => element.id == id).first.message = message;
+
+          setState(() {
+            messages;
+          });
+
+          return;
+        }
+
 
         Map<String, dynamic> message = json.decode(data);
         MessageModel messageModel = MessageModel(id: message['id'], userId: message['user_id'], message: message['message'], sentAt: DateTime.parse(message['created_at']));
@@ -43,12 +70,7 @@ extension on ChatScreenState{
   Future<void> _initAllMessages() async{
     messages = await MessageModel.getAllMessages(roomId);
 
-    if(messages.length == 0){
-      state = chatState.noMessages;
-    }
-    else{
-      state = chatState.loaded;
-    }
+    _checkState();
 
     setState(() {
       messages;
@@ -63,11 +85,33 @@ extension on ChatScreenState{
     if(state != chatState.loaded){
       state = chatState.loaded;
     }
-
+    
     if (_controller.text.isNotEmpty) {
-      setState(() {
+      if(isEditing){
+        editingMessage!.message = _controller.text;
+        editingMessage!.update();
+      }
+      else{
         _channel.sink.add(_controller.text);
-      });
+      }
+    }
+    else if(isEditing){
+      editingMessage!.delete();
+    }
+
+    setState(() {
+      isEditing = false;
+    });
+  }
+
+  void _checkState(){
+    var messagesWithoutDates = messages.where((element) => element.id != 0).toList();
+
+    if(messagesWithoutDates.length == 0){
+      state = chatState.noMessages;
+    }
+    else{
+      state = chatState.loaded;
     }
   }
 

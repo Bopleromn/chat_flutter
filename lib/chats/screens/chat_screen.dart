@@ -38,6 +38,9 @@ class ChatScreenState extends State<ChatScreen> {
   List<MessageModel> messages = [];
   var state = chatState.loading;
 
+  bool isEditing = false;
+  MessageModel? editingMessage;
+
   @override
   void initState() {
     super.initState();
@@ -56,15 +59,22 @@ class ChatScreenState extends State<ChatScreen> {
           style: medium_black(),
         ),
         actions: [
-          CustomDropdownMenu(
-            context: context,
-            chatScreen: this,
-            menuItems: [MenuItem(text: 'Очистить чат', icon: CupertinoIcons.trash)],
-            child: Icon(
+          Container(
+            padding: EdgeInsets.all(10),
+            child: CustomDropdownMenu(
+              context,
+              menuItems: [MenuItem(text: 'Очистить чат', icon: CupertinoIcons.trash)],
+              callback: (MenuItem item){
+                if(item.text == 'Очистить чат'){
+                  _clearAllMessages();
+                }
+              },
+              child: Icon(
                 Icons.list,
                 size: 35,
               ),
-          ),
+            ),
+          )
         ],
       ),
       body: SafeArea(
@@ -90,7 +100,17 @@ class ChatScreenState extends State<ChatScreen> {
                               mainAxisAlignment: (message.userId == GetIt.I<UserModel>().id)
                                   ? MainAxisAlignment.start : (message.userId == 0 ? MainAxisAlignment.center : MainAxisAlignment.end),
                               children: [
-                                message_bubble_widget(message, context, this)
+                                MessageBubbleWidget(
+                                    context,
+                                    message: message,
+                                    onMessageEdited: (MessageModel message){
+                                        editingMessage = message;
+                                        _controller.text = message.message;
+                                        setState(() {
+                                          isEditing = true;
+                                        });
+                                    },
+                                )
                               ],
                             );
                           },
@@ -100,25 +120,13 @@ class ChatScreenState extends State<ChatScreen> {
               Row(
                 children: [
                   Expanded(
-                    child: TextFormField(
-                      controller: _controller,
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Colors.transparent,
-                        hoverColor: Colors.transparent,
-                        hintText: 'Введите сообщение',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(16.0),
-                        ),
-                        suffixIcon: IconButton(
-                          onPressed: () {
-                            _sendMessage();
-                            _controller.text = '';
-                          },
-                          icon: Icon(Icons.send),
-                        ),
-                      ),
-                    ),
+                    child: isEditing ? Column(
+                      children: [
+                        MessageToEditWidget(),
+                        EditField()
+                      ],
+                    )
+                    : EditField()
                   ),
                 ],
               ),
@@ -129,12 +137,68 @@ class ChatScreenState extends State<ChatScreen> {
     );
   }
 
-  // Helpers
 
-  // Function to clear messages from the other files(can be optimized)
-  void clearAllMessages(){
-    _clearAllMessages();
+  Widget EditField(){
+    return TextFormField(
+      controller: _controller,
+      decoration: InputDecoration(
+        filled: true,
+        fillColor: light_grey().withOpacity(0.6),
+        hoverColor: Colors.transparent,
+        hintText: 'Введите сообщение',
+        border: OutlineInputBorder(
+          borderSide: BorderSide.none,
+          borderRadius: isEditing ? BorderRadius.only(bottomLeft: Radius.circular(16), bottomRight: Radius.circular(16)) 
+                                  : BorderRadius.circular(16)
+        ),
+        suffixIcon: IconButton(
+          onPressed: () {
+            _sendMessage();
+            _controller.text = '';
+          },
+          icon: Icon(Icons.send),
+        ),
+      ),
+    );
   }
+
+  Widget MessageToEditWidget(){
+    return  Container(
+        width: MediaQuery.sizeOf(context).width,
+        alignment: Alignment.topLeft,
+        padding: EdgeInsets.only(left: 15, right: 15, bottom: 5, top: 5),
+        decoration: BoxDecoration(
+            color: light_grey(),
+            borderRadius: BorderRadius.only(
+                topRight: Radius.circular(16),
+                topLeft: Radius.circular(16)
+            )
+        ),
+        child: Row(
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Редактировать сообщение', style: small_primary(),),
+                Text(editingMessage!.message, style: small_black(),),
+              ],
+            ),
+            Spacer(),
+            GestureDetector(
+              onTap: (){
+                setState(() {
+                  isEditing = false;
+                  _controller.text = '';
+                });
+              },
+              child: Icon(Icons.close, color: Colors.black, size: 15,),
+            )
+          ],
+        )
+    );
+  }
+
+  // Helpers
 
   final TextEditingController _controller = TextEditingController();
   final ScrollController _scrollController = ScrollController();

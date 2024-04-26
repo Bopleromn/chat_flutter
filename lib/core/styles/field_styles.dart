@@ -54,6 +54,7 @@ InputDecoration search_field_decoration(String hint){
     )
   );
 }
+
 InputDecoration filled_search_field_decoration(String hint){
   return InputDecoration(
     border: OutlineInputBorder(
@@ -61,16 +62,17 @@ InputDecoration filled_search_field_decoration(String hint){
       borderRadius: BorderRadius.circular(15)
     ),
     filled: true,
-    fillColor: const Color.fromARGB(255, 116, 165, 249),
+    fillColor: currentTheme.canvasColor,
     hoverColor: Colors.transparent,
-    hintStyle: TextStyle(fontSize: 18, color: Colors.white.withOpacity(0.8)),
+    hintStyle: TextStyle(fontSize: 18, color: currentTheme.hintColor),
     hintText: hint,
     suffixIcon: Icon(
       Icons.search,
-      color: Colors.white.withOpacity(0.9),
+      color: currentTheme.hintColor,
     )
   );
 }
+
 InputDecoration field_profile_decoration(String hint, Icon icon){
   return InputDecoration(
       border: OutlineInputBorder(),

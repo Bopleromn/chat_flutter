@@ -1,14 +1,13 @@
 part of '../profile_screen.dart';
 
 extension on ProfileScreenState{
-  void GetAllInfo () async{
-    setState(() {
-    emailcontroller.text = email;
-    passwordlcontroller.text  = password;
-    namecontroller.text = name;
-    });
+  void _getAllInfo () {
+    emailController.text = user.email;
+    passwordController.text  = user.password;
+    nameController.text = user.name;
   }
-    void updatePasswordVisibility(){
+
+  void _updatePasswordVisibility(){
     if(passwordVisible == true){
       passwordVisible = false;
     }
@@ -20,7 +19,8 @@ extension on ProfileScreenState{
       passwordVisible;
     });
   }
-  void SaveAllInfo(){
+
+  void _saveAllInfo(){
     final usermodel = GetIt.I<UserModel>();
   }
 }

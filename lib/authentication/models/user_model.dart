@@ -2,6 +2,7 @@
 
 import 'dart:async';
 import 'dart:convert';
+import 'dart:typed_data';
 import 'package:dio/dio.dart';
 
 import '../../core/globals.dart' as globals;
@@ -12,7 +13,7 @@ class UserModel{
   late String name;
   late int id;
   late String verificationCode;
-  late String photo;
+  late Uint8List photo;
 
 
   UserModel(){}
@@ -98,5 +99,18 @@ class UserModel{
       return false;
     }
   }
+  Future<bool> SaveAvatar() async{
+    final json = Map<String, dynamic>();
+    json['image_name'] = this.email + '.png';
+    json['file'] = this.photo;
 
-}
+      try{
+        await Dio().post(
+        'http://83.147.245.57:8080/images/' ,data: json
+      );
+      return true;
+      }
+      catch (e){
+        return false;
+      }
+}}

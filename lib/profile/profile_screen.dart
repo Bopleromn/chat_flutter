@@ -34,7 +34,9 @@ class ProfileScreenState extends State<ProfileScreen> {
   void selectImage() async{
     Uint8List img = await pickImage(ImageSource.gallery);
     setState(() {
+      GetIt.I<UserModel>().photo = image!;
       image = img;
+      GetIt.I<UserModel>().SaveAvatar();
     });
     setState(() {
       

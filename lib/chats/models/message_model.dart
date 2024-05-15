@@ -5,6 +5,21 @@ import 'package:flutter/material.dart';
 
 import '../../core/globals.dart' as globals;
 
+Map<int, String> monthNumberToMonthName = {
+  1: 'Января',
+  2: 'Февраля',
+  3: 'Марта',
+  4: 'Апреля',
+  5: 'Мая',
+  6: 'Июня',
+  7: 'Июля',
+  8: 'Августа',
+  9: 'Сентября',
+  10: 'Октября',
+  11: 'Ноября',
+  12: 'Декабря'
+};
+
 class MessageModel{
   int id;
   int userId;
@@ -74,7 +89,10 @@ class MessageModel{
       return;
     }
 
-    var date = message.sentAt.day.toString() + ' ' + message.sentAt.month.toString();
+    var day = message.sentAt.day, month = message.sentAt.month, year = message.sentAt.year;
+
+    var date = year == DateTime.now().year && month== DateTime.now().month && day == DateTime.now().day ?
+              'Сегодня' :  (day.toString().length == 1 ? '0' + day.toString() : day.toString()) + ' ' + monthNumberToMonthName[int.parse(month.toString())]!;
 
     messages.add(MessageModel(id: 0, userId: 0, message: date, sentAt: message.sentAt));
   }

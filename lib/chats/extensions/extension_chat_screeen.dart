@@ -1,9 +1,10 @@
 part of '../screens/chat_screen.dart';
 
 extension on ChatScreenState{
-  void _listenToStream(){
+  void _listenToStream() async{
+    // Listen for messages
     this._channel = WebSocketChannel.connect(
-      Uri.parse('ws://${globals.ip}/chats/${roomId}/${otherUser.id}'),
+      Uri.parse('ws://${globals.ip}/chats/${widget.roomId}/${widget.otherUser.id}'),
     );
 
     _channel.stream.listen((event) async {
@@ -24,7 +25,16 @@ extension on ChatScreenState{
         else if(data.contains('__message_deleted__')){
           int id = int.parse(data.substring(('__message_deleted__').length));
 
-          messages.removeWhere((element) => element.id == id);
+          MessageModel messageToDelete = messages.where((element) => element.id == id).first;
+
+          messages.removeWhere((element) => element.id == messageToDelete.id);
+          if(messages.where((element) => element.sentAt.day == messageToDelete.sentAt.day &&
+                            element.sentAt.month == messageToDelete.sentAt.month &&
+                            element.sentAt.year == messageToDelete.sentAt.year).toList().length == 1){
+            messages.removeWhere((element) =>  element.sentAt.day == messageToDelete.sentAt.day &&
+                                                element.sentAt.month == messageToDelete.sentAt.month &&
+                                                element.sentAt.year == messageToDelete.sentAt.year);
+          }
 
           setState(() {
             messages;
@@ -47,7 +57,15 @@ extension on ChatScreenState{
 
           return;
         }
+        else if(data.contains('__user_status_updated__')){
+          await widget.otherUser.getLastSeen();
 
+          setState(() {
+            widget.otherUser;
+          });
+
+          return;
+        }
 
         Map<String, dynamic> message = json.decode(data);
         MessageModel messageModel = MessageModel(id: message['id'], userId: message['user_id'], message: message['message'], sentAt: DateTime.parse(message['created_at']));
@@ -68,7 +86,7 @@ extension on ChatScreenState{
   }
 
   Future<void> _initAllMessages() async{
-    messages = await MessageModel.getAllMessages(roomId);
+    messages = await MessageModel.getAllMessages(widget.roomId);
 
     _checkState();
 
@@ -116,7 +134,7 @@ extension on ChatScreenState{
   }
 
   Future<void> _clearAllMessages() async{
-    if(!await MessageModel.clearAllMessages(roomId)){
+    if(!await MessageModel.clearAllMessages(widget.roomId)){
       return;
     }
 

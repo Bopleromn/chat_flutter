@@ -1,4 +1,4 @@
-import 'package:authentication/chats/widgets/user_list_widget.dart';
+import 'package:authentication/chats/widgets/chat_list_widget.dart';
 import 'package:authentication/core/styles/field_styles.dart';
 import 'package:authentication/core/styles/text_styles.dart';
 import 'package:authentication/core/themes.dart';
@@ -12,6 +12,7 @@ import 'package:sizer/sizer.dart';
 
 import '../../authentication/models/user_model.dart';
 import '../../core/globals.dart' as globals;
+import '../models/chat_model.dart';
 import 'chat_screen.dart';
 
 part '../extensions/extension_chats_screen.dart';
@@ -26,17 +27,21 @@ class ChatsScreen extends StatefulWidget {
 class ChatsScreenState extends State<ChatsScreen> {
   @override
   void initState() {
-    initUsers();
+    initLists();
 
     super.initState();
   }
 
   static List<UserModel> users = [];
+  static List<ChatModel> chats = [];
 
-  void initUsers() async {
-    users = await initAllUsers();
+
+  void initLists() async {
+    users = await UserModel.getAll();
+    chats = await ChatModel.getAll(users);
 
     setState(() {
+      chats;
       users;
     });
   }
@@ -109,8 +114,13 @@ class ChatsScreenState extends State<ChatsScreen> {
                     crossAxisSpacing: 10,
                     mainAxisSpacing: 15
                 ),
-                itemCount: 6,
-                itemBuilder: users_list_widget
+                itemCount: chats.length,
+                itemBuilder: (context, index){
+                  return ChatListWidget(
+                    index,
+                    callback: (user) => _goToChat(user),
+                    isChat: true,);
+                }
             ),flex: 85)
           ],
         ),

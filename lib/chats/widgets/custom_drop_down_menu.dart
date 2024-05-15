@@ -8,14 +8,12 @@ import 'package:sizer/sizer.dart';
 
 class CustomDropdownMenu extends StatelessWidget{
   CustomDropdownMenu(
-    this.context,
   {
     required this.menuItems,
     required this.child,
     required this.callback
   });
 
-  BuildContext context;
   List<MenuItem> menuItems;
   Widget child;
   Function(MenuItem item) callback;
@@ -61,12 +59,12 @@ class MenuItem {
 
   Widget buildItem() {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Icon(icon, color: Colors.black, size: 11.sp),
-        SizedBox(width: 5.sp,),
+        SizedBox(width: 2.sp,),
         Expanded(
-          child: Text(text, style: small_black().copyWith(fontSize: 10.sp)
-        ),
+          child: Text(text, style: small_black().copyWith(fontSize: 9.sp), softWrap: false,),
         ),
       ],
     );

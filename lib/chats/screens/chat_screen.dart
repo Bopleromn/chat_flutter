@@ -22,19 +22,18 @@ part '../extensions/extension_chat_screeen.dart';
 
 class ChatScreen extends StatefulWidget{
   @override
-  State<ChatScreen> createState() => ChatScreenState(roomId: roomId, otherUser: otherUser);
+  State<ChatScreen> createState() => ChatScreenState();
 
   late int roomId;
   late UserModel otherUser;
+  Function() callBack;
 
-  ChatScreen({required this.roomId, required this.otherUser});
+  ChatScreen({required this.roomId, required this.otherUser, required this.callBack});
 }
 
 enum chatState {loading, loaded, noMessages}
 
 class ChatScreenState extends State<ChatScreen> {
-  ChatScreenState({required this.roomId, required this.otherUser});
-
   List<MessageModel> messages = [];
   var state = chatState.loading;
 
@@ -43,10 +42,10 @@ class ChatScreenState extends State<ChatScreen> {
 
   @override
   void initState() {
-    super.initState();
-
     _listenToStream();
     _initAllMessages();
+
+    super.initState();
   }
 
   @override
@@ -54,15 +53,23 @@ class ChatScreenState extends State<ChatScreen> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(
-          otherUser.name!,
-          style: medium_black(),
+        title: Column(
+          children: [
+            Text(
+              widget.otherUser.name!,
+              style: medium_black(),
+            ),
+            Padding(padding: EdgeInsets.only(top: 2)),
+            Text(
+              _parseLastSeen(widget.otherUser.lastSeen),
+              style: widget.otherUser.lastSeen! == 'active'? small_primary().copyWith(fontWeight: FontWeight.normal) : small_grey()
+            ),
+          ],
         ),
         actions: [
           Container(
             padding: EdgeInsets.all(10),
             child: CustomDropdownMenu(
-              context,
               menuItems: [MenuItem(text: 'Очистить чат', icon: CupertinoIcons.trash)],
               callback: (MenuItem item){
                 if(item.text == 'Очистить чат'){
@@ -77,60 +84,71 @@ class ChatScreenState extends State<ChatScreen> {
           )
         ],
       ),
-      body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.only(
-              left: 16.0,
-              right: 16.0,
-              top: 8.0,
-              bottom: 8.0
-          ),
-          child: Column(
-            children: [
-              Expanded(
-                child: state == chatState.loading ? Container() :
-                      (state == chatState.noMessages ? Center(child: Text('Здесь пока нет сообщений', style: medium_grey(),)) :
-                        ListView.builder(
-                          itemCount: messages.length,
-                          controller: _scrollController,
-                          itemBuilder: (context, index) {
-                            final message = messages[index];
+      body:
+      PopScope(
+        onPopInvoked: (_){
+            widget.callBack();
+        },
+        child: SafeArea(
+          child: Padding(
+            padding: EdgeInsets.only(
+                left: 16.0,
+                right: 16.0,
+                top: 8.0,
+                bottom: 8.0
+            ),
+            child: Column(
+              children: [
+                Expanded(
+                  child: state == chatState.loading ? Container() :
+                        (state == chatState.noMessages ? Center(child: Text('Здесь пока нет сообщений', style: medium_grey(),)) :
+                          ListView.builder(
+                            itemCount: messages.length,
+                            controller: _scrollController,
+                            itemBuilder: (context, index) {
+                              final message = messages[index];
 
-                            return Row(
-                              mainAxisAlignment: (message.userId == GetIt.I<UserModel>().id)
-                                  ? MainAxisAlignment.start : (message.userId == 0 ? MainAxisAlignment.center : MainAxisAlignment.end),
-                              children: [
-                                MessageBubbleWidget(
-                                    context,
-                                    message: message,
-                                    onMessageEdited: (MessageModel message){
-                                        editingMessage = message;
-                                        _controller.text = message.message;
-                                        setState(() {
-                                          isEditing = true;
-                                        });
-                                    },
-                                )
-                              ],
-                            );
-                          },
+                              return Row(
+                                mainAxisAlignment: (message.userId == GetIt.I<UserModel>().id)
+                                    ? MainAxisAlignment.start : (message.userId == 0 ? MainAxisAlignment.center : MainAxisAlignment.end),
+                                children: [
+                                  MessageBubbleWidget(
+                                      context,
+                                      message: message,
+                                      onMessageEdited: (MessageModel message){
+                                          editingMessage = message;
+                                          _controller.text = message.message;
+                                          setState(() {
+                                            isEditing = true;
+                                          });
+                                      },
+                                      onMessageDeleted: (MessageModel message) async{
+                                        if(await message.delete()){
+
+                                        }
+                                      },
+                                  )
+                                ],
+                              );
+                            },
+                          )
                         )
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: isEditing ? Column(
+                        children: [
+                          MessageToEditWidget(),
+                          EditField()
+                        ],
                       )
-              ),
-              Row(
-                children: [
-                  Expanded(
-                    child: isEditing ? Column(
-                      children: [
-                        MessageToEditWidget(),
-                        EditField()
-                      ],
-                    )
-                    : EditField()
-                  ),
-                ],
-              ),
-            ],
+                      : EditField()
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -204,8 +222,19 @@ class ChatScreenState extends State<ChatScreen> {
   final ScrollController _scrollController = ScrollController();
 
   late WebSocketChannel _channel;
-  late int roomId;
-  late UserModel otherUser;
+
+  String _parseLastSeen(String lastSeen){
+    if(lastSeen == 'active') {
+      return 'В сети';
+    }
+
+    DateTime parsed = DateTime.parse(lastSeen);
+
+    return 'Был(-а) ' + ((parsed.day == DateTime.now().day) ? 'сегодня' :
+            (parsed.day.toString().length == 1 ? '0' + parsed.day.toString() : parsed.day.toString()) + '.' +
+            (parsed.month.toString().length == 1 ? '0' + parsed.month.toString() : parsed.month.toString())) +
+            ' в ' + parsed.hour.toString() + ':' + (parsed.minute.toString().length == 1 ? '0' + parsed.minute.toString() : parsed.minute.toString());
+  }
 
   void _scrollDown(){
     _scrollController.animateTo(

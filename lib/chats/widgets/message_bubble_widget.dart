@@ -11,27 +11,13 @@ import '../../core/styles/text_styles.dart';
 import '../../core/themes.dart';
 import '../models/message_model.dart';
 
-Map<int, String> monthNumberToMonthName = {
-  1: 'Января',
-  2: 'Февраля',
-  3: 'Марта',
-  4: 'Апреля',
-  5: 'Мая',
-  6: 'Июня',
-  7: 'Июля',
-  8: 'Августа',
-  9: 'Сентября',
-  10: 'Октября',
-  11: 'Ноября',
-  12: 'Декабря'
-};
-
 class MessageBubbleWidget extends StatelessWidget{
-  MessageBubbleWidget(this.context, {required this.message, required this.onMessageEdited});
+  MessageBubbleWidget(this.context, {required this.message, required this.onMessageEdited, required this.onMessageDeleted});
 
   BuildContext context;
   MessageModel message;
   Function(MessageModel) onMessageEdited;
+  Function(MessageModel) onMessageDeleted;
 
   @override
   Widget build(BuildContext context) {
@@ -39,39 +25,38 @@ class MessageBubbleWidget extends StatelessWidget{
       return DateBubble();
     }
 
-    return CustomDropdownMenu(
-        context,
-        menuItems: [
-          MenuItem(text: 'Редактировать', icon: CupertinoIcons.pen),
-          MenuItem(text: 'Удалить', icon: CupertinoIcons.trash)
-        ],
-        callback: (MenuItem item){
-          if(item.text == 'Удалить'){
-            message.delete();
-          }
-          else if(item.text == 'Редактировать'){
-            onMessageEdited(message);
-          }
-        },
-        child: MessageBubble(),
-    );
+   if(message.userId != GetIt.I.get<UserModel>().id) {
+     return CustomDropdownMenu(
+       menuItems: [
+         MenuItem(text: 'Редактировать', icon: CupertinoIcons.pen),
+         MenuItem(text: 'Удалить', icon: CupertinoIcons.trash)
+       ],
+       callback: (MenuItem item) {
+         if (item.text == 'Удалить') {
+          onMessageDeleted(message);
+         }
+         else if (item.text == 'Редактировать') {
+           onMessageEdited(message);
+         }
+       },
+       child: MessageBubble(),
+     );
+   }
+   else{
+     return MessageBubble();
+   }
   }
 
   Widget DateBubble() {
     return Container(
-      constraints: BoxConstraints(maxWidth: MediaQuery
-          .sizeOf(context)
-          .width * 0.25),
-      height: MediaQuery
-          .sizeOf(context)
-          .height * 0.03,
+      constraints: BoxConstraints(maxWidth: MediaQuery.sizeOf(context).width * 0.25),
+      height: MediaQuery.sizeOf(context).height * 0.03,
       alignment: Alignment.center,
       decoration: BoxDecoration(
         color: light_grey().withOpacity(0.6),
         borderRadius: BorderRadius.circular(8),
       ),
-      child: Text(message.sentAt.day.toString() + ' ' +
-          monthNumberToMonthName[message.sentAt.month]!),
+      child: Text(message.message),
     );
   }
 

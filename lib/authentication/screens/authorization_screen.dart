@@ -29,8 +29,6 @@ class _AuthorizationScreenState extends State<AuthorizationScreen> {
 
   @override
   void initState(){
-    checkIfAuthorized();
-
     super.initState();
   }
 

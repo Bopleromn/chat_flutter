@@ -39,7 +39,9 @@ class _ChatListWidgetState extends State<ChatListWidget> {
 
     return GestureDetector(
         onTap: (){
-          widget.callback(widget.chat!.users[0]!);
+          widget.callback(
+              (widget.isChat ? widget.chat!.users[0]! : widget.user!)
+          );
         },
         child: Container(
           decoration: BoxDecoration(

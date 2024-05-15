@@ -114,12 +114,12 @@ class ChatsScreenState extends State<ChatsScreen> {
                     crossAxisSpacing: 10,
                     mainAxisSpacing: 15
                 ),
-                itemCount: chats.length,
+                itemCount: users.length,
                 itemBuilder: (context, index){
                   return ChatListWidget(
                     index,
                     callback: (user) => _goToChat(user),
-                    isChat: true,);
+                    isChat: false,);
                 }
             ),flex: 85)
           ],

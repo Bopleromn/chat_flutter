@@ -2,13 +2,9 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:chat/chats/widgets/custom_drop_down_menu.dart';
 import 'package:chat/core/styles/text_styles.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_portal/flutter_portal.dart';
 import 'package:get_it/get_it.dart';
-import 'package:sizer/sizer.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
 import '../../authentication/models/user_model.dart';

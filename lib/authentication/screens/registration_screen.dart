@@ -1,10 +1,11 @@
-import 'package:authentication/authentication/screens/email_screen.dart';
-import 'package:authentication/authentication/screens/verification_code_screen.dart';
+import 'package:chat/authentication/screens/email_screen.dart';
+import 'package:chat/authentication/screens/verification_code_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:sizer/sizer.dart';
 
 import '../../core/styles/field_styles.dart';
 import '../../core/styles/text_styles.dart';
@@ -120,7 +121,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             children: [
                           Text('Нажимая на эту кнопку, вы соглашаетесь с ',
                               style: small_grey()),
-                          Text('нашей политикой конфиденциальности', style: small_secondary()),
+                          Text('нашей политикой конфиденциальности', style: small_grey().copyWith(color: Colors.orange)),
                             ],
                           )
                         ],
@@ -128,12 +129,12 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   const Padding(padding: EdgeInsets.fromLTRB(0, 10, 0, 0)),
                   Container(
                     decoration: rounded_decoration(),
-                    height: 50,
                     child: TextButton(
                       onPressed: tryRegister,
                       child: Text('Зарегистрироваться', style: small_white()),
                     ),
                   ),
+                  Container(height: 15.sp,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

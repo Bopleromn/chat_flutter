@@ -1,11 +1,12 @@
-import 'package:authentication/authentication/screens/email_screen.dart';
-import 'package:authentication/authentication/screens/verification_code_screen.dart';
+import 'package:chat/authentication/screens/email_screen.dart';
+import 'package:chat/authentication/screens/verification_code_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sizer/sizer.dart';
 
 import '../../core/styles/field_styles.dart';
 import '../../core/styles/text_styles.dart';
@@ -128,6 +129,7 @@ class _AuthorizationScreenState extends State<AuthorizationScreen> {
                         style: small_primary(),
                       ))
                 ]),
+                Container(height: 5.sp),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   mainAxisAlignment: MainAxisAlignment.center,

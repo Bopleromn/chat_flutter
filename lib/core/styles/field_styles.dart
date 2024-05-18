@@ -1,11 +1,13 @@
-import 'package:authentication/core/styles/colors.dart';
-import 'package:authentication/core/themes.dart';
+import 'package:chat/core/styles/colors.dart';
+import 'package:chat/core/styles/text_styles.dart';
+import 'package:chat/core/themes.dart';
 import 'package:flutter/material.dart';
 
 InputDecoration field_regular_decoration(String hint){
   return InputDecoration(
       border: OutlineInputBorder(),
       hintText: hint,
+      hintStyle: small_black(),
       focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: currentTheme.primaryColor),
           borderRadius: BorderRadius.circular(10)
@@ -64,12 +66,12 @@ InputDecoration filled_search_field_decoration(String hint){
     filled: true,
     fillColor: currentTheme.canvasColor,
     hoverColor: Colors.transparent,
-    hintStyle: TextStyle(fontSize: 18, color: currentTheme.hintColor),
+    hintStyle: TextStyle(fontSize: 17, color: medium_black().color!.withOpacity(0.6)),
     hintText: hint,
-    suffixIcon: Icon(
-      Icons.search,
-      color: currentTheme.hintColor,
-    )
+    // suffixIcon: Icon(
+    //   Icons.search,
+    //   color: currentTheme.hintColor,
+    // )
   );
 }
 

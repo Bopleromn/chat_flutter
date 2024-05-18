@@ -1,8 +1,10 @@
-import 'package:authentication/chats/widgets/chat_list_widget.dart';
-import 'package:authentication/core/styles/field_styles.dart';
-import 'package:authentication/core/styles/text_styles.dart';
-import 'package:authentication/core/themes.dart';
-import 'package:authentication/widgets/avatar.dart';
+import 'dart:ui';
+
+import 'package:chat/chats/widgets/chat_list_widget.dart';
+import 'package:chat/core/styles/field_styles.dart';
+import 'package:chat/core/styles/text_styles.dart';
+import 'package:chat/core/themes.dart';
+import 'package:chat/helpers/image.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +18,7 @@ import '../models/chat_model.dart';
 import 'chat_screen.dart';
 
 part '../extensions/extension_chats_screen.dart';
+part '../widgets/drawer_widget.dart';
 
 class ChatsScreen extends StatefulWidget {
   const ChatsScreen({super.key});
@@ -32,13 +35,15 @@ class ChatsScreenState extends State<ChatsScreen> {
     super.initState();
   }
 
-  static List<UserModel> users = [];
+  static List<UserModel> users = [], selectedUsers = [];
   static List<ChatModel> chats = [];
 
+  UserModel user = GetIt.I<UserModel>();
 
   void initLists() async {
     users = await UserModel.getAll();
-    chats = await ChatModel.getAll(users);
+    selectedUsers = users;
+    chats = await ChatModel.getAll(selectedUsers);
 
     setState(() {
       chats;
@@ -46,67 +51,40 @@ class ChatsScreenState extends State<ChatsScreen> {
     });
   }
 
+  bool _isChat = true, _isDarkTheme = false;
+  TextEditingController _searchFieldController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawer(
-        backgroundColor: currentTheme.colorScheme.background,
-        child: Padding(
-        padding: EdgeInsets.only(left: 3.w,right: 3.w,top: 10.h),
-        child: Column(
-          children: [
-            CircleCustomAvatar(context),
-            SizedBox(height: 2.h,),
-            Text('Alex', style: large_black(), textAlign: TextAlign.start,),
-            SizedBox(child: Container(color: Colors.grey.withOpacity(0.7),),height: 2,),
-            SizedBox(height: 2.h,),
-            Container(
-              height: 6.h,
-              decoration: BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.2),
-                    offset: Offset(0, 2),
-                    blurRadius: 4
-                  ),
-                ],
-                color: currentTheme.cardColor
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Text('Темная тема', style: small_black(),),
-                  CupertinoSwitch(value: isChecked!, onChanged: (newbool){
-                     setState(() {
-                      isChecked = newbool!;
-                      changeTheme();
-                      currentTheme;
-                     });
-                  })
-                ],
-              ),
-            )
-          ],
-        ),
-      ),
-      ),
+      drawer: drawer_widget(),
+      onDrawerChanged: (bool isOpen) async{
+        if(!isOpen){
+          await user.update();
+        }
+      },
       appBar: AppBar(
-        shadowColor: Colors.transparent,
-        backgroundColor: currentTheme.colorScheme.background,
+        // backgroundColor: currentTheme == lightTheme ? currentTheme.colorScheme.background :
+        //                                               Colors.white10,
         title: Text('Чаты', style: medium_black()),
         centerTitle: true,
+        iconTheme: IconThemeData(color: medium_black().color!.withOpacity(0.6)),
       ),
       body: Container(
-        padding: EdgeInsets.only(left: 10,right: 10),
+        color: currentTheme.colorScheme.background,
+        padding: EdgeInsets.only(left: 10, right: 10),
         child: Column(
           children: [
-            Expanded(child: Container(),flex: 3,),
+            Expanded(child: Container(), flex: 3,),
             Expanded(child: Container(
+              padding: EdgeInsets.only(left: 5, right: 5),
               child: TextFormField(
+                controller: _searchFieldController,
+                onChanged: _search,
                 decoration: filled_search_field_decoration('Найти'),
               ),
             ),flex: 9,),
-            Expanded(child: Container(),flex: 5,),
+            Expanded(child: Container(),flex: 3,),
             Expanded(child:GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 1,
@@ -114,12 +92,13 @@ class ChatsScreenState extends State<ChatsScreen> {
                     crossAxisSpacing: 10,
                     mainAxisSpacing: 15
                 ),
-                itemCount: users.length,
+                itemCount: _isChat ? chats.length : selectedUsers.length,
                 itemBuilder: (context, index){
                   return ChatListWidget(
                     index,
                     callback: (user) => _goToChat(user),
-                    isChat: false,);
+                    isChat: _isChat,
+                  );
                 }
             ),flex: 85)
           ],
@@ -127,5 +106,4 @@ class ChatsScreenState extends State<ChatsScreen> {
       ),
     );
   }
-  bool isChecked = false;
 }

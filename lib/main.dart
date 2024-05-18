@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:authentication/authentication/models/user_model.dart';
-import 'package:authentication/widgets/snackbar.dart';
+import 'package:chat/authentication/models/user_model.dart';
+import 'package:chat/chats/screens/chats_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -9,7 +9,6 @@ import 'package:sizer/sizer.dart';
 import 'package:window_manager/window_manager.dart';
 
 import 'authentication/screens/authorization_screen.dart';
-import 'package:authentication/navigation/navigation_bar.dart' as _;
 import 'core/routes.dart';
 import 'core/themes.dart';
 
@@ -17,10 +16,10 @@ void main() async {
   _initSingletons();
   WidgetsFlutterBinding.ensureInitialized();
 
-  // await windowManager.ensureInitialized();
-  // if (Platform.isWindows) {
-  //    WindowManager.instance.setSize(Size(400, 800));
-  // }
+  await windowManager.ensureInitialized();
+  if (Platform.isWindows) {
+     WindowManager.instance.setSize(Size(400, 800));
+  }
 
   runApp(MyApp());
 }
@@ -48,7 +47,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         debugShowCheckedModeBanner: false,
         theme: currentTheme,
         routes: myRoutes,
-        home: isAuthorized ? _.NavigationBar(): AuthorizationScreen(),
+        home: isAuthorized ? ChatsScreen(): AuthorizationScreen(),
       );
     });
   }
@@ -71,7 +70,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
       user.password = sharedPreferences.getString('password')!;
 
       if(await user.authorize()){
-        //isAuthorized = true;
+        isAuthorized = true;
       }
       else{
         isAuthorized = false;

@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:authentication/chats/widgets/custom_drop_down_menu.dart';
-import 'package:authentication/core/styles/text_styles.dart';
+import 'package:chat/chats/widgets/custom_drop_down_menu.dart';
+import 'package:chat/core/styles/text_styles.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -52,12 +52,14 @@ class ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        //backgroundColor: currentTheme.colorScheme.secondary,
         centerTitle: true,
+        iconTheme: IconThemeData(color: medium_black().color!.withOpacity(0.6)),
         title: Column(
           children: [
             Text(
               widget.otherUser.name!,
-              style: medium_black(),
+              style: medium_black().copyWith(fontSize: 17),
             ),
             Padding(padding: EdgeInsets.only(top: 2)),
             Text(
@@ -84,74 +86,74 @@ class ChatScreenState extends State<ChatScreen> {
           )
         ],
       ),
-      body:
-      PopScope(
+      body: PopScope(
         onPopInvoked: (_){
             widget.callBack();
         },
         child: SafeArea(
-          child: Padding(
-            padding: EdgeInsets.only(
-                left: 16.0,
-                right: 16.0,
-                top: 8.0,
-                bottom: 8.0
-            ),
-            child: Column(
-              children: [
-                Expanded(
-                  child: state == chatState.loading ? Container() :
-                        (state == chatState.noMessages ? Center(child: Text('Здесь пока нет сообщений', style: medium_grey(),)) :
-                          ListView.builder(
-                            itemCount: messages.length,
-                            controller: _scrollController,
-                            itemBuilder: (context, index) {
-                              final message = messages[index];
+            child: Container(
+              color: currentTheme.colorScheme.background,
+              padding: EdgeInsets.only(
+                  left: 13.0,
+                  right: 13.0,
+                  top: 10.0,
+                  bottom: 10.0
+              ),
+              child: Column(
+                children: [
+                  Expanded(
+                    child: state == chatState.loading ? Container() :
+                          (state == chatState.noMessages ? Center(child: Text('Здесь пока нет сообщений', style: medium_grey(),)) :
+                            ListView.builder(
+                              itemCount: messages.length,
+                              controller: _scrollController,
+                              itemBuilder: (context, index) {
+                                final message = messages[index];
 
-                              return Row(
-                                mainAxisAlignment: (message.userId == GetIt.I<UserModel>().id)
-                                    ? MainAxisAlignment.start : (message.userId == 0 ? MainAxisAlignment.center : MainAxisAlignment.end),
-                                children: [
-                                  MessageBubbleWidget(
-                                      context,
-                                      message: message,
-                                      onMessageEdited: (MessageModel message){
-                                          editingMessage = message;
-                                          _controller.text = message.message;
-                                          setState(() {
-                                            isEditing = true;
-                                          });
-                                      },
-                                      onMessageDeleted: (MessageModel message) async{
-                                        if(await message.delete()){
+                                return Row(
+                                  mainAxisAlignment: (message.userId == GetIt.I<UserModel>().id)
+                                      ? MainAxisAlignment.start : (message.userId == 0 ? MainAxisAlignment.center : MainAxisAlignment.end),
+                                  children: [
+                                    MessageBubbleWidget(
+                                        context,
+                                        message: message,
+                                        onMessageEdited: (MessageModel message){
+                                            editingMessage = message;
+                                            _controller.text = message.message;
+                                            setState(() {
+                                              isEditing = true;
+                                            });
+                                        },
+                                        onMessageDeleted: (MessageModel message) async{
+                                          if(await message.delete()){
 
-                                        }
-                                      },
-                                  )
-                                ],
-                              );
-                            },
+                                          }
+                                        },
+                                    )
+                                  ],
+                                );
+                              },
+                            )
                           )
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: isEditing ? Column(
+                          children: [
+                            MessageToEditWidget(),
+                            EditField()
+                          ],
                         )
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: isEditing ? Column(
-                        children: [
-                          MessageToEditWidget(),
-                          EditField()
-                        ],
-                      )
-                      : EditField()
-                    ),
-                  ],
-                ),
-              ],
+                        : EditField()
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),
-      ),
     );
   }
 
@@ -161,9 +163,10 @@ class ChatScreenState extends State<ChatScreen> {
       controller: _controller,
       decoration: InputDecoration(
         filled: true,
-        fillColor: light_grey().withOpacity(0.6),
+        fillColor: currentTheme.canvasColor,
         hoverColor: Colors.transparent,
         hintText: 'Введите сообщение',
+        hintStyle: small_grey(),
         border: OutlineInputBorder(
           borderSide: BorderSide.none,
           borderRadius: isEditing ? BorderRadius.only(bottomLeft: Radius.circular(16), bottomRight: Radius.circular(16)) 
@@ -227,6 +230,8 @@ class ChatScreenState extends State<ChatScreen> {
     if(lastSeen == 'active') {
       return 'В сети';
     }
+
+    print('parsed');
 
     DateTime parsed = DateTime.parse(lastSeen);
 

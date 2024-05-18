@@ -14,12 +14,12 @@ class UserModel{
   late String name;
   late int id;
   late String verificationCode;
-  late Uint8List photo;
+  late String photo;
   late String lastSeen;
 
   UserModel(){}
 
-  UserModel.filled({required this.id, required this.email, required this.name, required this.lastSeen});
+  UserModel.filled({required this.id, required this.email, required this.name, required this.lastSeen, required this.photo});
 
   static Future<List<UserModel>> getAll() async {
     try {
@@ -36,7 +36,8 @@ class UserModel{
             id: user['id'],
             email: user['email'],
             name: user['name'],
-            lastSeen: user['last_seen']
+            lastSeen: user['last_seen'],
+            photo: user['photo']
         );
 
         if (userToAdd.id != GetIt.I<UserModel>().id) {
@@ -63,7 +64,7 @@ class UserModel{
       this.email = json['data']['email'];
       this.password = json['data']['password'];
       this.name = json['data']['name'];
-      //this.photo = json['data']['photo'];
+      this.photo = json['data']['photo'];
 
       return true;
     }
@@ -83,6 +84,28 @@ class UserModel{
     try {
       await Dio().post(
           'http://${globals.ip}/users', data: json
+      );
+
+      return true;
+    }
+    catch (e){
+      return false;
+    }
+  }
+
+  Future<bool> update() async{
+    final json = Map<String,dynamic>();
+
+    json['email'] = this.email;
+    json['password'] = this.password;
+    json['name'] = this.name;
+    json['last_seen'] = 'active';
+    json['photo'] = this.photo;
+    json['age'] = 0;
+
+    try {
+      await Dio().put(
+          'http://${globals.ip}/users?email=${this.email}&password=${this.password}', data: json
       );
 
       return true;
@@ -140,30 +163,14 @@ class UserModel{
     catch (e){}
   }
 
-  Future<void> getLastSeen() async{
-    try{
+  Future<void> getLastSeen() async {
+    try {
       var response = await Dio().get(
           'http://${globals.ip}/users/activity?user_id=${this.id}'
       );
 
       this.lastSeen = (response as Map<String, dynamic>)['data'];
     }
-    catch (e){}
+    catch (e) {}
   }
-
-  Future<bool> SaveAvatar() async{
-    final json = Map<String, dynamic>();
-    json['image_name'] = this.email + '.png';
-    json['file'] = this.photo;
-
-      try{
-        await Dio().post(
-        'http://83.147.245.57:8080/images/' ,data: json
-      );
-
-      return true;
-      }
-      catch (e){
-        return false;
-      }
-}}
+}

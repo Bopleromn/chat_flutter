@@ -1,6 +1,6 @@
-import 'package:authentication/authentication/bloc/authentication_event.dart';
-import 'package:authentication/authentication/screens/verification_code_screen.dart';
-import 'package:authentication/core/styles/field_styles.dart';
+import 'package:chat/authentication/bloc/authentication_event.dart';
+import 'package:chat/authentication/screens/verification_code_screen.dart';
+import 'package:chat/core/styles/field_styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';

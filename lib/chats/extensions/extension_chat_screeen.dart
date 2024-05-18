@@ -2,7 +2,6 @@ part of '../screens/chat_screen.dart';
 
 extension on ChatScreenState{
   void _listenToStream() async{
-    // Listen for messages
     this._channel = WebSocketChannel.connect(
       Uri.parse('ws://${globals.ip}/chats/${widget.roomId}/${widget.otherUser.id}'),
     );
@@ -61,7 +60,7 @@ extension on ChatScreenState{
           await widget.otherUser.getLastSeen();
 
           setState(() {
-            widget.otherUser;
+            widget.otherUser.lastSeen;
           });
 
           return;
@@ -71,7 +70,6 @@ extension on ChatScreenState{
         MessageModel messageModel = MessageModel(id: message['id'], userId: message['user_id'], message: message['message'], sentAt: DateTime.parse(message['created_at']));
 
         MessageModel.addDate(messages, messageModel);
-
         messages.add(messageModel);
 
         setState(() {

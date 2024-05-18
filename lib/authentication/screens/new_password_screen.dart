@@ -1,6 +1,6 @@
-import 'package:authentication/authentication/bloc/authentication_event.dart';
-import 'package:authentication/core/styles/field_styles.dart';
-import 'package:authentication/core/styles/text_styles.dart';
+import 'package:chat/authentication/bloc/authentication_event.dart';
+import 'package:chat/core/styles/field_styles.dart';
+import 'package:chat/core/styles/text_styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';

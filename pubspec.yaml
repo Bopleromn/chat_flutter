@@ -1,5 +1,5 @@
-name: authentication
-description: "Project that consists of registration and registration, in order to use them in your own projects"
+name: chat
+description: "This is chat app demo"
 
 publish_to: 'none'
 version: 1.0.0+1
@@ -23,7 +23,7 @@ dependencies:
   sizer: ^2.0.15
   google_nav_bar: ^5.0.6
   flutter_portal: ^1.1.4
-  image_picker: ^1.1.0
+  image_picker: ^1.1.1
   window_manager: ^0.2.7
 
 

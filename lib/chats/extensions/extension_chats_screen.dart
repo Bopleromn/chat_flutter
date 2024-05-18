@@ -23,4 +23,18 @@ extension on ChatsScreenState{
             callBack: initLists,)),
     );
   }
+
+  void _search(String userName){
+    if(userName.length == 0 || userName == '@'){
+      setState(() => _isChat = true);
+      return;
+    }
+
+    ChatsScreenState.selectedUsers = ChatsScreenState.users.where((user) => user.name.startsWith(userName)).toList();
+
+    setState(() {
+      _isChat = false;
+      ChatsScreenState.selectedUsers;
+    });
+  }
 }

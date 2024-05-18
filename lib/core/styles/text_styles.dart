@@ -62,7 +62,7 @@ TextStyle large_secondary(){
 
 TextStyle small_black(){
   return TextStyle(
-    color: Colors.black,
+    color: currentTheme == lightTheme ? Colors.black : Colors.white,
     fontSize: smallFontSize,
     fontWeight: FontWeight.normal,
   );
@@ -70,7 +70,7 @@ TextStyle small_black(){
 
 TextStyle medium_black(){
   return TextStyle(
-    color: Colors.black,
+    color: currentTheme == lightTheme ? Colors.black : Colors.white,
     fontSize: mediumFontSize,
     fontWeight: FontWeight.normal,
   );
@@ -78,7 +78,7 @@ TextStyle medium_black(){
 
 TextStyle large_black(){
   return TextStyle(
-    color: Colors.black,
+    color: currentTheme == lightTheme ? Colors.black : Colors.white,
     fontSize: largeFontSize,
     fontWeight: FontWeight.normal,
   );
@@ -86,9 +86,10 @@ TextStyle large_black(){
 
 // White text styles
 
+
 TextStyle small_white(){
   return TextStyle(
-    color: Colors.white,
+    color: currentTheme == lightTheme ? Colors.white : Colors.black,
     fontSize: smallFontSize,
     fontWeight: FontWeight.normal,
   );
@@ -96,7 +97,7 @@ TextStyle small_white(){
 
 TextStyle medium_white(){
   return TextStyle(
-    color: Colors.white,
+    color: currentTheme == lightTheme ? Colors.white : Colors.black,
     fontSize: mediumFontSize,
     fontWeight: FontWeight.normal,
   );
@@ -104,7 +105,7 @@ TextStyle medium_white(){
 
 TextStyle large_white(){
   return TextStyle(
-    color: Colors.white,
+    color: currentTheme == lightTheme ? Colors.white : Colors.black,
     fontSize: largeFontSize,
     fontWeight: FontWeight.bold,
   );

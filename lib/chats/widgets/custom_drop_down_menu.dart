@@ -1,5 +1,5 @@
-import 'package:authentication/chats/screens/chats_screen.dart';
-import 'package:authentication/core/styles/text_styles.dart';
+import 'package:chat/chats/screens/chats_screen.dart';
+import 'package:chat/core/styles/text_styles.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

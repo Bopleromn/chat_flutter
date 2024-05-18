@@ -1,5 +1,5 @@
-import 'package:authentication/chats/screens/chat_screen.dart';
-import 'package:authentication/chats/widgets/custom_drop_down_menu.dart';
+import 'package:chat/chats/screens/chat_screen.dart';
+import 'package:chat/chats/widgets/custom_drop_down_menu.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -56,29 +56,30 @@ class MessageBubbleWidget extends StatelessWidget{
         color: light_grey().withOpacity(0.6),
         borderRadius: BorderRadius.circular(8),
       ),
-      child: Text(message.message),
+      child: Text(message.message, style: small_black(),),
     );
   }
 
   Widget MessageBubble(){
     return Container(
       constraints: BoxConstraints(maxWidth: MediaQuery.sizeOf(context).width * 0.66),
-      padding: EdgeInsets.all(8.0),
-      margin: EdgeInsets.all(4.0),
+      padding: EdgeInsets.all(7.0),
+      margin: EdgeInsets.all(5.0),
       decoration: BoxDecoration(
-        color: message.userId == GetIt.I.get<UserModel>().id ? Colors.grey : currentTheme.primaryColor,
-        borderRadius: BorderRadius.circular(8),
+        color: message.userId == GetIt.I.get<UserModel>().id ? currentTheme.secondaryHeaderColor :
+                                                               currentTheme.primaryColor,
+        borderRadius: BorderRadius.circular(7),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.end,
         mainAxisSize: MainAxisSize.min,
         children: [
           Flexible(
-              child: Text(message.message, style: small_white(),)
+              child: Text(message.message, style: small_white().copyWith(color: Colors.white),)
           ),
-          SizedBox(width: 1.5.w,),
+          SizedBox(width: 2.w,),
           Text(
-              message.sentAt.hour.toString() + ':' + (message.sentAt.toString().length == 1
+              message.sentAt.hour.toString() + ':' + (message.sentAt.minute.toString().length == 1
                   ? '0${message.sentAt.minute}'
                   : message.sentAt.minute.toString()),
               style: TextStyle(fontSize: 10, color: light_grey()),

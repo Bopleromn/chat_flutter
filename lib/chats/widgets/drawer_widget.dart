@@ -1,13 +1,14 @@
 part of '../screens/chats_screen.dart';
 
 extension on ChatsScreenState{
+  // ignore: non_constant_identifier_names
   Widget drawer_widget(){
     final nameController = TextEditingController(), emailController = TextEditingController();
 
     return Drawer(
       backgroundColor: currentTheme.colorScheme.background,
       child: Padding(
-        padding: EdgeInsets.only(left: 0.w,right: 0.w,top: 5.h),
+        padding: EdgeInsets.only(left: 0.w,right: 0.w,top: 10.h),
         child: Column(
           children: [
             SizedBox(

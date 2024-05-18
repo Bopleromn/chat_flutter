@@ -3,8 +3,7 @@ part of '../screens/chats_screen.dart';
 extension on ChatsScreenState{
   // ignore: non_constant_identifier_names
   Widget drawer_widget(){
-    final nameController = TextEditingController(), emailController = TextEditingController();
-
+    final nameController = TextEditingController();
     return Drawer(
       backgroundColor: currentTheme.colorScheme.background,
       child: Padding(
@@ -19,7 +18,7 @@ extension on ChatsScreenState{
                 fit: StackFit.expand,
                 children: [
                   CircleAvatar(
-                    backgroundImage: user.photo.length == 0 ? NetworkImage('https://qph.cf2.quoracdn.net/main-qimg-6d72b77c81c9841bd98fc806d702e859-lq') :
+                    backgroundImage: user.photo.length == 0 ? const NetworkImage('https://qph.cf2.quoracdn.net/main-qimg-6d72b77c81c9841bd98fc806d702e859-lq') :
                                                               NetworkImage('http://${globals.ip}/images?name=${user.photo}'),
                   ),
                   Positioned(
@@ -48,9 +47,9 @@ extension on ChatsScreenState{
                         },
                         elevation: 2.0,
                         fillColor: currentTheme.primaryColor,
-                        child: Icon(Icons.camera_alt_outlined, color: Colors.white,),
-                        padding: EdgeInsets.all(10),
-                        shape: CircleBorder(),
+                        child: const Icon(Icons.camera_alt_outlined, color: Colors.white,),
+                        padding: const EdgeInsets.all(10),
+                        shape: const CircleBorder(),
                       )),
                 ],
               ),

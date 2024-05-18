@@ -52,8 +52,8 @@ class ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        surfaceTintColor: currentTheme.colorScheme.secondary,
-        backgroundColor: currentTheme.colorScheme.secondary,
+        backgroundColor: currentTheme == darkTheme ? Colors.white10 : Colors.white,
+        surfaceTintColor:  currentTheme == darkTheme ? Colors.black : Colors.white,
         centerTitle: true,
         iconTheme: IconThemeData(color: medium_black().color!.withOpacity(0.6)),
         title: Column(

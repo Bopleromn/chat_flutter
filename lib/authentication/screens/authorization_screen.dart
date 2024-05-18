@@ -69,9 +69,7 @@ class _AuthorizationScreenState extends State<AuthorizationScreen> {
             showSnackBar(context, 'Неверный логин или пароль');
           }
         },
-        child: SingleChildScrollView(
-          physics: const NeverScrollableScrollPhysics(),
-          child: Scaffold(
+        child: Scaffold(
             body: Container(
               padding: EdgeInsets.fromLTRB(25, 170, 25, 0),
               child: Column(
@@ -168,8 +166,7 @@ class _AuthorizationScreenState extends State<AuthorizationScreen> {
               ),
             ),
           ),
-        ),
-    );
+      );
   }
 
   // Main functions

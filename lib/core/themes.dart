@@ -9,8 +9,8 @@ final lightTheme = ThemeData(
     cardColor: const Color(0xffF8F8F8),
     dividerColor: Colors.green,
     hoverColor: Colors.grey.withOpacity(0.2),
-    iconTheme: const IconThemeData(
-      color: Colors.grey,
+    iconTheme: IconThemeData(
+      color: Colors.black.withOpacity(0.6),
     ),
     appBarTheme: AppBarTheme(
       surfaceTintColor: Colors.white,

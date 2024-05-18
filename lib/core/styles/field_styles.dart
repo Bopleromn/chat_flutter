@@ -7,7 +7,7 @@ InputDecoration field_regular_decoration(String hint){
   return InputDecoration(
       border: OutlineInputBorder(),
       hintText: hint,
-      hintStyle: small_black(),
+      hintStyle: small_grey(),
       focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: currentTheme.primaryColor),
           borderRadius: BorderRadius.circular(10)
@@ -19,6 +19,7 @@ InputDecoration password_field_decoration(String hint, bool passwordVisible, Fun
   return InputDecoration(
       border: OutlineInputBorder(),
       hintText: hint,
+      hintStyle: small_grey(),
       focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: currentTheme.primaryColor),
           borderRadius: BorderRadius.circular(10)

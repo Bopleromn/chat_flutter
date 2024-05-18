@@ -45,9 +45,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             showSnackBar(context, 'Не удалось зарегистрироваться');
           }
         },
-        child: SingleChildScrollView(
-          physics: const NeverScrollableScrollPhysics(),
-          child: Scaffold(
+        child: Scaffold(
               body: Container(
                 padding: EdgeInsets.fromLTRB(25, 90, 25, 0),
                 child: Column(
@@ -154,7 +152,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   ],
                 ),
               )
-          ),
         ),
     );
   }

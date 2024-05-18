@@ -16,10 +16,12 @@ void main() async {
   _initSingletons();
   WidgetsFlutterBinding.ensureInitialized();
 
-  // await windowManager.ensureInitialized();
-  // if (Platform.isWindows) {
-  //    WindowManager.instance.setSize(Size(400, 800));
-  // }
+  await windowManager.ensureInitialized();
+  if (Platform.isWindows) {
+     WindowManager.instance.setSize(Size(400, 750));
+  }
+
+  //
 
   runApp(MyApp());
 }
@@ -56,7 +58,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   void initState() {
     WidgetsBinding.instance.addObserver(this);
 
-    checkIfAuthorized();
+    //checkIfAuthorized();
 
     super.initState();
   }

@@ -50,6 +50,10 @@ class ChatScreenState extends State<ChatScreen> {
       appBar: AppBar(
         backgroundColor: currentTheme == darkTheme ? Colors.white10 : Colors.white,
         surfaceTintColor:  currentTheme == darkTheme ? Colors.black : Colors.white,
+        bottom: const PreferredSize(
+          preferredSize: Size.fromHeight(1),
+          child: Divider(height: 1, color: Colors.white12,),
+        ),
         centerTitle: true,
         iconTheme: IconThemeData(color: medium_black().color!.withOpacity(0.6)),
         title: Column(
@@ -158,6 +162,7 @@ class ChatScreenState extends State<ChatScreen> {
   Widget EditField(){
     return TextFormField(
       controller: _controller,
+      style: small_black(),
       decoration: InputDecoration(
         filled: true,
         fillColor: currentTheme.canvasColor,

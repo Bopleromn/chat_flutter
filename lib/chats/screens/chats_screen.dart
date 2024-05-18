@@ -59,13 +59,17 @@ class ChatsScreenState extends State<ChatsScreen> {
     return Scaffold(
       drawer: drawer_widget(),
       onDrawerChanged: (bool isOpen) async{
-        if(!isOpen){
+        if(!isOpen){//
           await user.update();
         }
       },
       appBar: AppBar(
         backgroundColor: currentTheme == darkTheme ? Colors.white10 : Colors.white,
         surfaceTintColor:  currentTheme == darkTheme ? Colors.black : Colors.white,
+        bottom: const PreferredSize(
+          preferredSize: Size.fromHeight(1),
+          child: Divider(height: 1, color: Colors.white12,),
+        ),
         title: Text('Чаты', style: medium_black()),
         centerTitle: true,
         iconTheme: IconThemeData(color: medium_black().color!.withOpacity(0.6)),

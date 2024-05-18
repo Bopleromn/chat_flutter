@@ -65,6 +65,10 @@ extension on ChatsScreenState{
                         if(nameController.text.length > 1 && nameController.text.startsWith('@')){
                           user.name = nameController.text;
                         }
+
+                        setState(() {
+                          user.name;
+                        });
                       },
                       readOnly: false
                     );
@@ -90,7 +94,7 @@ extension on ChatsScreenState{
                   padding: EdgeInsets.all(10),
                   child: Row(
                     children: [
-                      Icon(CupertinoIcons.moon, size: 20.sp,),
+                      Icon(CupertinoIcons.moon, size: 20.sp, color: currentTheme.iconTheme.color),
                       SizedBox(width: 1.w,),
                       Text('Ночная тема', style: small_black(),),
                       Spacer(),
@@ -126,7 +130,7 @@ extension on ChatsScreenState{
           onTap: callback,
           child: child
         )
-    );
+    );//
   }
 
   Widget field({required String fieldName, required String fieldValue, required IconData icon}){
@@ -135,7 +139,7 @@ extension on ChatsScreenState{
       padding: EdgeInsets.all(10),
       child: Row(
         children: [
-        Icon(icon, size: 20.sp,),
+        Icon(icon, size: 20.sp, color: currentTheme.iconTheme.color,),
         SizedBox(width: 1.w,),
         Text(fieldName, style: small_black(),),
         Spacer(),

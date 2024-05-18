@@ -43,43 +43,46 @@ class _EmailScreenState extends State<EmailScreen> {
             showSnackBar(context, 'Нет такого пользователя');
           }
         },
-        child: Scaffold(
-          body: Container(
-            padding: EdgeInsets.fromLTRB(25, 180, 25, 0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Text('Забыли пароль?', style: large_black(),),
-                Text('Введите адрес почты', style: small_grey(),),
-                Padding(padding: EdgeInsets.fromLTRB(0, 40, 0, 0)),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Почта', style: small_grey()),
-                    Padding(padding: EdgeInsets.fromLTRB(0, 5, 0, 0)),
-                    TextField(
-                        controller: _emailController,
-                        decoration:field_regular_decoration('********@mail.com'))
-                  ],
-                ),
-                Padding(padding: EdgeInsets.fromLTRB(0, 40, 0, 0)),
-                Container(
-                    decoration: rounded_decoration(),
-                    child:
-                    TextButton(onPressed: trySendingEmail, child: Text('Отправить код подтверждения', style: small_white(),),)
-                ),
-                Padding(padding: EdgeInsets.fromLTRB(0, 10, 0, 0)),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text('Помните пароль?', style: small_grey(),),
-                    TextButton(onPressed: (){
-                      Navigator.of(context).pushNamed('/AuthorizationScreen');
-                    },
-                      child: Text('Войдите', style: small_primary(),))
-                  ],
-                )
-              ],
+        child: SingleChildScrollView(
+          physics: const NeverScrollableScrollPhysics(),
+          child: Scaffold(
+            body: Container(
+              padding: EdgeInsets.fromLTRB(25, 180, 25, 0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Text('Забыли пароль?', style: large_black(),),
+                  Text('Введите адрес почты', style: small_grey(),),
+                  Padding(padding: EdgeInsets.fromLTRB(0, 40, 0, 0)),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Почта', style: small_grey()),
+                      Padding(padding: EdgeInsets.fromLTRB(0, 5, 0, 0)),
+                      TextField(
+                          controller: _emailController,
+                          decoration:field_regular_decoration('********@mail.com'))
+                    ],
+                  ),
+                  Padding(padding: EdgeInsets.fromLTRB(0, 40, 0, 0)),
+                  Container(
+                      decoration: rounded_decoration(),
+                      child:
+                      TextButton(onPressed: trySendingEmail, child: Text('Отправить код подтверждения', style: small_white(),),)
+                  ),
+                  Padding(padding: EdgeInsets.fromLTRB(0, 10, 0, 0)),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('Помните пароль?', style: small_grey(),),
+                      TextButton(onPressed: (){
+                        Navigator.of(context).pushNamed('/AuthorizationScreen');
+                      },
+                        child: Text('Войдите', style: small_primary(),))
+                    ],
+                  )
+                ],
+              ),
             ),
           ),
         )

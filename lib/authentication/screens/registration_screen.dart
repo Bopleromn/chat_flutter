@@ -45,113 +45,116 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             showSnackBar(context, 'Не удалось зарегистрироваться');
           }
         },
-        child: Scaffold(
-            body: Container(
-              padding: EdgeInsets.fromLTRB(25, 90, 25, 0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Text('Создайте аккаунт',
-                      style: large_black()),
-                  Text('Заполните поля, чтобы зарегистрироваться',
-                      style: small_grey()),
-                  Padding(padding: EdgeInsets.fromLTRB(0, 20, 0, 0)),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('Имя', style: small_grey()),
-                      Padding(padding: EdgeInsets.fromLTRB(0, 5, 0, 0)),
-                      TextField(
-                          controller: _nameController,
-                          decoration: field_regular_decoration('Введите имя'))
-                    ],
-                  ),
-                  const Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 0)),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('Почта', style: small_grey()),
-                      Padding(padding: EdgeInsets.fromLTRB(0, 5, 0, 0)),
-                      TextField(
-                          controller: _emailController,
-                          decoration: field_regular_decoration('********@***.**'))
-                    ],
-                  ),
-                  Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 0)),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('Пароль', style: small_grey()),
-                      Padding(padding: EdgeInsets.fromLTRB(0, 5, 0, 0)),
-                      TextField(
-                        controller: _firstPasswordController,
-                        decoration: password_field_decoration('*******', passwordVisible, updatePasswordVisibility),
-                        obscureText: passwordVisible,
-                      )
-                    ],
-                  ),
-                  Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 0)),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('Потвердите пароль', style: small_grey()),
-                      Padding(padding: EdgeInsets.fromLTRB(0, 5, 0, 0)),
-                      TextField(
-                        controller: _secondPasswordController,
-                        decoration: password_field_decoration('*******', passwordVisible, updatePasswordVisibility),
-                        obscureText: passwordVisible,
-                      )
-                    ],
-                  ),
-                  Padding(padding: EdgeInsets.fromLTRB(0, 10, 0, 0)),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Checkbox(
-                            value: isChecked,
-                            onChanged: (newBool) {
-                              setState(() {
-                                isChecked = newBool!;
-                              });
-                            },
-                            activeColor: Theme.of(context).primaryColor,
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                          Text('Нажимая на эту кнопку, вы соглашаетесь с ',
-                              style: small_grey()),
-                          Text('нашей политикой конфиденциальности', style: small_grey().copyWith(color: Colors.orange)),
-                            ],
-                          )
-                        ],
-                  ),
-                  const Padding(padding: EdgeInsets.fromLTRB(0, 10, 0, 0)),
-                  Container(
-                    decoration: rounded_decoration(),
-                    child: TextButton(
-                      onPressed: tryRegister,
-                      child: Text('Зарегистрироваться', style: small_white()),
+        child: SingleChildScrollView(
+          physics: const NeverScrollableScrollPhysics(),
+          child: Scaffold(
+              body: Container(
+                padding: EdgeInsets.fromLTRB(25, 90, 25, 0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Text('Создайте аккаунт',
+                        style: large_black()),
+                    Text('Заполните поля, чтобы зарегистрироваться',
+                        style: small_grey()),
+                    Padding(padding: EdgeInsets.fromLTRB(0, 20, 0, 0)),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Имя', style: small_grey()),
+                        Padding(padding: EdgeInsets.fromLTRB(0, 5, 0, 0)),
+                        TextField(
+                            controller: _nameController,
+                            decoration: field_regular_decoration('Введите имя'))
+                      ],
                     ),
-                  ),
-                  Container(height: 15.sp,),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text('Уже есть аккаунт? ', style: small_grey()),
-                      TextButton(
-                          onPressed: () {
-                            Navigator.of(context).pushNamed('/AuthorizationScreen');
-                          },
-                          child: Text(
-                            'Войти',
-                            style: small_primary(),
-                          ))
-                    ],
-                  ),
-                ],
-              ),
-            )
+                    const Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 0)),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Почта', style: small_grey()),
+                        Padding(padding: EdgeInsets.fromLTRB(0, 5, 0, 0)),
+                        TextField(
+                            controller: _emailController,
+                            decoration: field_regular_decoration('********@***.**'))
+                      ],
+                    ),
+                    Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 0)),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Пароль', style: small_grey()),
+                        Padding(padding: EdgeInsets.fromLTRB(0, 5, 0, 0)),
+                        TextField(
+                          controller: _firstPasswordController,
+                          decoration: password_field_decoration('*******', passwordVisible, updatePasswordVisibility),
+                          obscureText: passwordVisible,
+                        )
+                      ],
+                    ),
+                    Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 0)),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Потвердите пароль', style: small_grey()),
+                        Padding(padding: EdgeInsets.fromLTRB(0, 5, 0, 0)),
+                        TextField(
+                          controller: _secondPasswordController,
+                          decoration: password_field_decoration('*******', passwordVisible, updatePasswordVisibility),
+                          obscureText: passwordVisible,
+                        )
+                      ],
+                    ),
+                    Padding(padding: EdgeInsets.fromLTRB(0, 10, 0, 0)),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Checkbox(
+                              value: isChecked,
+                              onChanged: (newBool) {
+                                setState(() {
+                                  isChecked = newBool!;
+                                });
+                              },
+                              activeColor: Theme.of(context).primaryColor,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                            Text('Нажимая на эту кнопку, вы соглашаетесь с ',
+                                style: small_grey()),
+                            Text('нашей политикой конфиденциальности', style: small_grey().copyWith(color: Colors.orange)),
+                              ],
+                            )
+                          ],
+                    ),
+                    const Padding(padding: EdgeInsets.fromLTRB(0, 10, 0, 0)),
+                    Container(
+                      decoration: rounded_decoration(),
+                      child: TextButton(
+                        onPressed: tryRegister,
+                        child: Text('Зарегистрироваться', style: small_white()),
+                      ),
+                    ),
+                    Container(height: 15.sp,),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text('Уже есть аккаунт? ', style: small_grey()),
+                        TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pushNamed('/AuthorizationScreen');
+                            },
+                            child: Text(
+                              'Войти',
+                              style: small_primary(),
+                            ))
+                      ],
+                    ),
+                  ],
+                ),
+              )
+          ),
         ),
     );
   }

@@ -64,8 +64,8 @@ class ChatsScreenState extends State<ChatsScreen> {
         }
       },
       appBar: AppBar(
-        // backgroundColor: currentTheme == lightTheme ? currentTheme.colorScheme.background :
-        //                                               Colors.white10,
+        surfaceTintColor: currentTheme.colorScheme.secondary,
+        backgroundColor: currentTheme.colorScheme.secondary,
         title: Text('Чаты', style: medium_black()),
         centerTitle: true,
         iconTheme: IconThemeData(color: medium_black().color!.withOpacity(0.6)),

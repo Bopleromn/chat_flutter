@@ -27,8 +27,9 @@ extension on ChatsScreenState{
                       child: RawMaterialButton(
                         onPressed: () async{
                           String path = await picImage();
-
+                          try{
                           if(path.length != 0){
+                            path = path.replaceAll('/', '\\');
                             String name = path.substring(path.lastIndexOf('\\'));
 
                             if(await saveImage(path, name)){
@@ -37,6 +38,12 @@ extension on ChatsScreenState{
                               });
                             }
                           }
+                          }catch (e){
+                            print(e);
+                            print(path);
+                          }
+                        
+
                         },
                         elevation: 2.0,
                         fillColor: currentTheme.primaryColor,

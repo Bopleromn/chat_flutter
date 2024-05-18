@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 final lightTheme = ThemeData(
     primaryColor: Colors.green,
     secondaryHeaderColor: Colors.grey,
-    canvasColor: Color(0xffF0F0F0),
-    hintColor: Color(0xffD0D0D0),
-    cardColor: Color(0xffF8F8F8),
+    canvasColor: const Color(0xffF0F0F0),
+    hintColor: const Color(0xffD0D0D0),
+    cardColor: const Color(0xffF8F8F8),
     dividerColor: Colors.green,
     hoverColor: Colors.grey.withOpacity(0.2),
-    iconTheme: IconThemeData(
+    iconTheme: const IconThemeData(
       color: Colors.grey,
     ),
     appBarTheme: AppBarTheme(
@@ -24,6 +24,7 @@ final lightTheme = ThemeData(
     colorScheme: ColorScheme.fromSeed(
     seedColor: Colors.green,
     brightness: Brightness.light,
+    // ignore: deprecated_member_use
     background: Colors.white,
     secondary: Colors.white,
     primary: Colors.green
@@ -34,8 +35,8 @@ final darkTheme = ThemeData(
     primaryColor: Colors.green,
     secondaryHeaderColor: Colors.white10,
     canvasColor: Colors.white10,
-    hintColor: Color(0xff101010),
-    cardColor: Color(0xff202020),
+    hintColor: const Color(0xff101010),
+    cardColor: const Color(0xff202020),
     dividerColor: Colors.white10,
     hoverColor: Colors.grey.withOpacity(0.2),
     iconTheme: IconThemeData(
@@ -52,6 +53,7 @@ final darkTheme = ThemeData(
     colorScheme: ColorScheme.fromSeed(
         seedColor: Colors.white10,
         brightness: Brightness.light,
+        // ignore: deprecated_member_use
         background: Colors.black,
         secondary: Colors.white10,
         primary: Colors.green

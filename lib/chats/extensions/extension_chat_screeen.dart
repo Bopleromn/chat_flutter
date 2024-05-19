@@ -7,6 +7,7 @@ extension on ChatScreenState{
     );
 
     _channel.stream.listen((event) async {
+      print(event);
       if(event.toString().length > 0){
         var data = event.toString();
 
@@ -63,6 +64,11 @@ extension on ChatScreenState{
             widget.otherUser.lastSeen;
           });
 
+          print(widget.otherUser.lastSeen);
+
+          return;
+        }
+        else if(data.contains('__user_status_updated_')){
           return;
         }
 

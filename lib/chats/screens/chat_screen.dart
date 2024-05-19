@@ -233,8 +233,6 @@ class ChatScreenState extends State<ChatScreen> {
       return 'В сети';
     }
 
-    print('parsed');
-
     DateTime parsed = DateTime.parse(lastSeen);
 
     return 'Был(-а) ' + ((parsed.day == DateTime.now().day) ? 'сегодня' :

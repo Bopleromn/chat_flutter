@@ -63,8 +63,6 @@ extension on ChatScreenState{
             widget.otherUser.lastSeen;
           });
 
-          print(widget.otherUser.lastSeen);
-
           return;
         }
         else if(data.startsWith('__user_status_updated_')){

@@ -15,6 +15,8 @@ extension on ChatsScreenState{
 
     final data = response.data as Map<String, dynamic>;
 
+    await otherUser.getLastSeen();
+
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) =>

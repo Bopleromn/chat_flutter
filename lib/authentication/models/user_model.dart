@@ -169,8 +169,10 @@ class UserModel{
           'http://${globals.ip}/users/activity?user_id=${this.id}'
       );
 
-      this.lastSeen = (response as Map<String, dynamic>)['data'];
+      this.lastSeen = (response.data as Map<String, dynamic>)['data'];
     }
-    catch (e) {}
+    catch (e) {
+      print(e);
+    }
   }
 }

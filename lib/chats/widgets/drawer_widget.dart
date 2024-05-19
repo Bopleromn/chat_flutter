@@ -30,7 +30,7 @@ extension on ChatsScreenState{
                           try{
                           if(path.length != 0){
                             path = path.replaceAll('/', '\\');
-                            String name = path.substring(path.lastIndexOf('\\'));
+                            String name = path.substring(path.lastIndexOf('\\') + 1);
 
                             if(await saveImage(path, name)){
                               setState(() {

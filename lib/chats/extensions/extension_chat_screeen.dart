@@ -7,7 +7,6 @@ extension on ChatScreenState{
     );
 
     _channel.stream.listen((event) async {
-      print(event);
       if(event.toString().length > 0){
         var data = event.toString();
 
@@ -68,7 +67,7 @@ extension on ChatScreenState{
 
           return;
         }
-        else if(data.contains('__user_status_updated_')){
+        else if(data.startsWith('__user_status_updated_')){
           return;
         }
 

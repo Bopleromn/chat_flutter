@@ -13,6 +13,8 @@ Future<String> picImage() async{
 
 Future<bool> saveImage(String path, String name) async {
   try {
+    print(name);
+
     var multipartFile = await MultipartFile.fromFile(path);
 
     var json = FormData.fromMap({

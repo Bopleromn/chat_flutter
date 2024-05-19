@@ -56,7 +56,7 @@ extension on ChatScreenState{
 
           return;
         }
-        else if(data.contains('__user_status_updated__')){
+        else if(data.contains('__user_status_updated_${widget.otherUser.id}__')){
           await widget.otherUser.getLastSeen();
 
           setState(() {

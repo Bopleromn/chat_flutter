@@ -16,12 +16,11 @@ void main() async {
   _initSingletons();
   WidgetsFlutterBinding.ensureInitialized();
 
-  await windowManager.ensureInitialized();
-  if (Platform.isWindows) {
-     WindowManager.instance.setSize(Size(400, 750));
-  }
+  // await windowManager.ensureInitialized();
+  // if (Platform.isWindows) {
+  //    WindowManager.instance.setSize(Size(400, 750));
+  // }
 
-  //
 
   runApp(MyApp());
 }

@@ -1,12 +1,9 @@
-import 'dart:io';
-
 import 'package:chat/authentication/models/user_model.dart';
 import 'package:chat/chats/screens/chats_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
-import 'package:window_manager/window_manager.dart';
 
 import 'authentication/screens/authorization_screen.dart';
 import 'core/routes.dart';

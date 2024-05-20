@@ -45,7 +45,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         debugShowCheckedModeBanner: false,
         theme: currentTheme,
         routes: myRoutes,
-        home: isAuthorized ? ChatsScreen(): AuthorizationScreen(),
+        home: isAuthorized ? const ChatsScreen(): AuthorizationScreen(),
       );
     });
   }

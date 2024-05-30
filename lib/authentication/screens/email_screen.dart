@@ -13,6 +13,8 @@ import '../bloc/authentication_bloc.dart';
 import '../bloc/authentication_state.dart';
 
 class EmailScreen extends StatefulWidget{
+  const EmailScreen({super.key});
+
   @override
   State<EmailScreen> createState() => _EmailScreenState();
 }

@@ -37,7 +37,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           else if(state is AuthenticationSuccessState){
             Navigator.of(context).pop();
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => VerificationCodeScreen(authenticationMethod.registration)));
+                MaterialPageRoute(builder: (context) => VerificationCodeScreen(authenticationMethod.verificationCode)));
             showSnackBar(context, 'Код отправлен вам на почту');
           }
           else if(state is AuthenticationFailureState){

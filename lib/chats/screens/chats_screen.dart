@@ -51,7 +51,7 @@ class ChatsScreenState extends State<ChatsScreen> {
     });
   }
 
-  bool _isChat = true, _isDarkTheme = false;
+  bool _isChat = false, _isDarkTheme = false;
   TextEditingController _searchFieldController = TextEditingController();
 
   @override

@@ -37,7 +37,7 @@ class UserModel{
             email: user['email'],
             name: user['name'],
             lastSeen: user['last_seen'],
-            photo: user['photo']
+            photo: user['photo'] == null ? '' : user['photo']
         );
 
         if (userToAdd.id != GetIt.I<UserModel>().id) {
@@ -64,7 +64,7 @@ class UserModel{
       this.email = json['data']['email'];
       this.password = json['data']['password'];
       this.name = json['data']['name'];
-      this.photo = json['data']['photo'];
+      this.photo = json['data']['photo'] == null ? '' : json['data']['photo'];
 
       return true;
     }

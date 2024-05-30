@@ -2,7 +2,6 @@ import 'package:chat/authentication/bloc/authentication_event.dart';
 import 'package:chat/core/styles/field_styles.dart';
 import 'package:chat/core/styles/text_styles.dart';
 import '../models/user_model.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,9 +16,7 @@ class VerificationCodeScreen extends StatefulWidget{
   @override
   State<VerificationCodeScreen> createState() => _VerificationCodeScreenState(previousScreen);
 
-  VerificationCodeScreen(authenticationMethod previousScreen){
-    this.previousScreen = previousScreen;
-  }
+  VerificationCodeScreen(this.previousScreen, {super.key});
 
   late authenticationMethod previousScreen;
 }
@@ -31,9 +28,7 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
 
   late authenticationMethod previousScreen;
 
-  _VerificationCodeScreenState(authenticationMethod previousScreen){
-    this.previousScreen = previousScreen;
-  }
+  _VerificationCodeScreenState(this.previousScreen);
 
   @override
   Widget build(BuildContext context) {

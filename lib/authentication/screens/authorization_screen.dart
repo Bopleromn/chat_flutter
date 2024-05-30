@@ -70,102 +70,97 @@ class _AuthorizationScreenState extends State<AuthorizationScreen> {
           }
         },
         child: Scaffold(
-            body: SingleChildScrollView(
-              physics: NeverScrollableScrollPhysics(),
-              child: Container(
-                padding: EdgeInsets.fromLTRB(25, 170, 25, 0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Добро пожаловать',
-                      style: large_black(),
-                    ),
-                    Text(
-                      'Введите почту и пароль, чтобы продолжить',
-                      style: small_grey(),
-                    ),
-                    Padding(padding: EdgeInsets.fromLTRB(0, 25, 0, 0)),
-                    Text('Почта', style: small_grey()),
-                    Padding(padding: EdgeInsets.fromLTRB(0, 5, 0, 0)),
-                    TextField(
-                      decoration: field_regular_decoration('Введите вашу почту'),
-                      controller: emailController,
-                    ),
-                    Padding(padding: EdgeInsets.fromLTRB(0, 25, 0, 0)),
-                    Text('Пароль', style: small_grey()),
-                    Padding(padding: EdgeInsets.fromLTRB(0, 5, 0, 0)),
-                    TextField(
-                      decoration: password_field_decoration('Введите пароль', passwordVisible, updatePasswordVisibility),
-                      obscureText: passwordVisible,
-                      controller: passwordController,
-                    ),
-                    Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 0)),
-                    Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-                      Container(
-                        child: Row(
-                          children: [
-                            Checkbox(
-                              value: isChecked,
-                              onChanged: (newBool) {
-                                setState(() {
-                                  isChecked = newBool!;
-                                });
-                              },
-                              activeColor: currentTheme.primaryColor,
-                            ),
-                            Text(
-                              'Запомнить меня',
-                              style: small_grey(),
-                            ),
-                          ],
+            body: Container(
+              padding: const EdgeInsets.fromLTRB(25, 170, 25, 0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Добро пожаловать',
+                    style: large_black(),
+                  ),
+                  Text(
+                    'Введите почту и пароль, чтобы продолжить',
+                    style: small_grey(),
+                  ),
+                  const Padding(padding: EdgeInsets.fromLTRB(0, 25, 0, 0)),
+                  Text('Почта', style: small_grey()),
+                  const Padding(padding: EdgeInsets.fromLTRB(0, 5, 0, 0)),
+                  TextField(
+                    decoration: field_regular_decoration('Введите вашу почту'),
+                    controller: emailController,
+                  ),
+                  const Padding(padding: EdgeInsets.fromLTRB(0, 25, 0, 0)),
+                  Text('Пароль', style: small_grey()),
+                  const Padding(padding: EdgeInsets.fromLTRB(0, 5, 0, 0)),
+                  TextField(
+                    decoration: password_field_decoration('Введите пароль', passwordVisible, updatePasswordVisibility),
+                    obscureText: passwordVisible,
+                    controller: passwordController,
+                  ),
+                  const Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 0)),
+                  Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+                    Row(
+                      children: [
+                        Checkbox(
+                          value: isChecked,
+                          onChanged: (newBool) {
+                            setState(() {
+                              isChecked = newBool!;
+                            });
+                          },
+                          activeColor: currentTheme.primaryColor,
                         ),
+                        Text(
+                          'Запомнить меня',
+                          style: small_grey(),
+                        ),
+                      ],
+                    ),
+                    TextButton(
+                        onPressed: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) => EmailScreen()));
+                        },
+                        child: Text(
+                          'Забыли пароль?',
+                          style: small_primary(),
+                        ))
+                  ]),
+                  Container(height: 5.sp),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        decoration: rounded_decoration(),
+                        child: TextButton(
+                          onPressed: tryAuthorize,
+                          child: Text('Войти', style: small_white()),
+                        ),
+                      )
+                    ],
+                  ),
+                  const Padding(padding: EdgeInsets.fromLTRB(0, 20, 0, 0)),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Ещё нет аккаунта?',
+                        style: small_grey(),
                       ),
                       TextButton(
                           onPressed: () {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) => EmailScreen()));
+                            Navigator.of(context).pushNamed('/RegistrationScreen');
                           },
                           child: Text(
-                            'Забыли пароль?',
+                            'Зарегистрируйтесь',
                             style: small_primary(),
-                          ))
-                    ]),
-                    Container(height: 5.sp),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          decoration: rounded_decoration(),
-                          child: TextButton(
-                            onPressed: tryAuthorize,
-                            child: Text('Войти', style: small_white()),
-                          ),
-                        )
-                      ],
-                    ),
-                    Padding(padding: EdgeInsets.fromLTRB(0, 20, 0, 0)),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Ещё нет аккаунта?',
-                          style: small_grey(),
-                        ),
-                        TextButton(
-                            onPressed: () {
-                              Navigator.of(context).pushNamed('/RegistrationScreen');
-                            },
-                            child: Text(
-                              'Зарегистрируйтесь',
-                              style: small_primary(),
-                            )
-                        )
-                      ],
-                    )
-                  ],
-                ),
+                          )
+                      )
+                    ],
+                  )
+                ],
               ),
             ),
           ),

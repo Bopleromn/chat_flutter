@@ -19,7 +19,7 @@ void main() async {
   // }
 
 
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 void _initSingletons() {
@@ -27,7 +27,7 @@ void _initSingletons() {
 }
 
 class MyApp extends StatefulWidget {
-  MyApp({super.key});
+  const MyApp({super.key});
 
   @override
   State<MyApp> createState() => _MyAppState();

@@ -1,9 +1,7 @@
 import 'package:chat/authentication/bloc/authentication_event.dart';
 import 'package:chat/authentication/screens/verification_code_screen.dart';
 import 'package:chat/core/styles/field_styles.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
